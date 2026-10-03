@@ -41,18 +41,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 }) => {
   const currentMonth = new Date().getMonth() + 1;
 
-  const categories: { id: SubjectCategory | 'all'; label: string; icon: React.ReactNode }[] = [
-    { id: 'all', label: 'All Subjects', icon: <Sparkles className="w-3.5 h-3.5" /> },
-    { id: 'mammal', label: 'Mammals & Big Game', icon: <PawPrint className="w-3.5 h-3.5" /> },
+  const categories: { id: SubjectCategory | 'all' | 'wildlife' | 'botanical'; label: string; icon: React.ReactNode }[] = [
+    { id: 'wildlife', label: '🐾 Animals & Wildlife', icon: <PawPrint className="w-3.5 h-3.5 text-emerald-400" /> },
+    { id: 'mammal', label: 'Mammals', icon: <PawPrint className="w-3.5 h-3.5" /> },
     { id: 'bird', label: 'Birds & Raptors', icon: <Feather className="w-3.5 h-3.5" /> },
-    { id: 'wildflower', label: 'Wildflowers', icon: <Flower2 className="w-3.5 h-3.5" /> },
-    { id: 'tree_foliage', label: 'Trees & Foliage', icon: <Trees className="w-3.5 h-3.5" /> },
+    { id: 'botanical', label: 'Flora & Foliage', icon: <Flower2 className="w-3.5 h-3.5 text-amber-400" /> },
+    { id: 'all', label: 'All Subjects (53)', icon: <Sparkles className="w-3.5 h-3.5" /> },
   ];
 
   const handleReset = () => {
     setFilters(prev => ({
       ...prev,
-      category: 'all',
+      category: 'wildlife',
       selectedState: 'all',
       selectedMonth: null,
       selectedRegion: 'all',
@@ -64,7 +64,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   };
 
   const isFiltered = 
-    filters.category !== 'all' || 
+    filters.category !== 'wildlife' || 
     filters.selectedState !== 'all' ||
     filters.selectedMonth !== null || 
     filters.selectedRegion !== 'all' || 

@@ -162,7 +162,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'mountain-lion',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Mountain_Lion_in_Glacier_National_Park.jpg/960px-Mountain_Lion_in_Glacier_National_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Puma-Portrait.jpg/960px-Puma-Portrait.jpg',
     identificationMarks: [
       'Long heavy cylindrical tail with a distinct black tip (one-third of body length)',
       'Uniform tawny to golden-buff coat with white chin and chest',
@@ -240,7 +240,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'bobcat',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Bobcat_at_Columbus_Zoo_Boo.jpg/960px-Bobcat_at_Columbus_Zoo_Boo.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Bobcat_%28Lynx_rufus%29_portrait.jpg/960px-Bobcat_%28Lynx_rufus%29_portrait.jpg',
     identificationMarks: [
       'Short bobbed tail (4-6 inches) with black bands and pure white underside on tip',
       'Tufted ears (less than 1 inch tufts) with prominent white spot on back of ears',
@@ -1548,7 +1548,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
       'Blooms open sequentially from the bottom to the top, forming an elongated cone'
     ],
     distinguishingTips: 'Distinct massive white pom-pom torches rising on tall stalks from tough wiry grass mounds in subalpine ridges.',
-    name: 'Beargrass Superbloom',
+    name: 'Subalpine Beargrass',
     scientificName: 'Xerophyllum tenax',
     category: 'wildflower',
     tagline: 'Towering 5-foot subalpine flower stalks with giant glowing white pom-pom torches.',
@@ -1626,7 +1626,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
       'Densely carpets entire gravel bajadas and rocky alluvial desert fans'
     ],
     distinguishingTips: 'Episodic superbloom phenomenon occurring after abundant winter rain; poppies open around 9:00 AM once air reaches 60°F.',
-    name: 'Desert Spring Wildflower Superbloom',
+    name: 'California & Desert Gold Poppy',
     scientificName: 'Eschscholzia parishii / Encelia farinosa',
     category: 'wildflower',
     tagline: 'Arid desert floor erupts into fiery carpets of gold poppies, purple lupine, and yellow brittlebush.',
@@ -2165,7 +2165,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'The Phantom of the North: colossal concentric facial discs and silent snow plunging.',
     description: 'North America’s largest owl by length, the Great Gray Owl is the phantom master of subalpine mountain meadows. With enormous concentric facial discs that act like satellite dishes, they can pinpoint the sound of a vole tunneling under three feet of crusted snow, hovering and plunging face-first through the snowpack.',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B0%D1%82%D0%B0%D1%8F_%D0%BD%D0%B5%D1%8F%D1%81%D1%8B%D1%82%D1%8C_%28Strix_nebulosa%2C_m%29%2C_%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%B0%D0%B4.jpg/960px-%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B0%D1%82%D0%B0%D1%8F_%D0%BD%D0%B5%D1%8F%D1%81%D1%8B%D1%82%D1%8C_%28Strix_nebulosa%2C_m%29%2C_%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%B0%D0%B4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Great_Gray_Owl_Gliding_%2850567781496%29.jpg/960px-Great_Gray_Owl_Gliding_%2850567781496%29.jpg',
     identificationMarks: [
       'Massive circular concentric facial disc with fine dark rings and white "bow-tie" neck marks',
       'Piercing yellow eyes that appear relatively small within the colossal facial disc',
@@ -2233,7 +2233,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'Monarch of western canyon skies: golden nape hackles and 7-foot soaring wingspan.',
     description: 'The Golden Eagle is North America’s premier aerial apex predator. Soaring effortlessly on thermals with a seven-foot wingspan, these massive raptors patrol rugged canyon cliffs, open sagebrush valleys, and alpine ridges, capable of diving at speeds over 150 mph to strike jackrabbits, marmots, and prairie dogs.',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/015_Wild_Golden_Eagle_in_flight_at_Pfyn-Finges_%28Switzerland%29_Photo_by_Giles_Laurent.jpg/960px-015_Wild_Golden_Eagle_in_flight_at_Pfyn-Finges_%28Switzerland%29_Photo_by_Giles_Laurent.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Golden_eagle_in_Wyoming_%2849391977231%29.jpg/960px-Golden_eagle_in_Wyoming_%2849391977231%29.jpg',
     identificationMarks: [
       'Luminous golden-buff hackle feathers on the nape of the neck',
       'Rich dark chocolate-brown body with long broad wings slightly upturned in a slight "V" in soaring flight',

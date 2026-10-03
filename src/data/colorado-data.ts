@@ -174,7 +174,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Dense dark brown chin beard and shaggy pantaloons on front legs'
     ],
     distinguishingTips: 'Unmistakable colossal silhouette; largest native land mammal in North America with dense woolly fleece.',
-    name: 'North American Bison (Yellowstone Rut)',
+    name: 'American Bison',
     scientificName: 'Bison bison',
     category: 'mammal',
     tagline: 'Thunderous bellows and dust-wallowing battles in Lamar & Hayden Valleys.',
@@ -252,7 +252,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Long ivory front claws (2 to 4 inches) visible when pawing salmon'
     ],
     distinguishingTips: 'Distinguished from Black Bears by the prominent shoulder hump, dished facial profile, and much longer, less curved front digging claws.',
-    name: 'Coastal Brown Bear & Salmon Run',
+    name: 'Coastal Brown Bear',
     scientificName: 'Ursus arctos horribilis',
     category: 'mammal',
     tagline: 'Giant coastal grizzlies catching leaping sockeye salmon at river falls.',
@@ -319,7 +319,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Straight bushy tail carried horizontally or trailing, never curled'
     ],
     distinguishingTips: 'More than twice the weight of a coyote; broader muzzle, rounded ears, and carries tail straight behind when moving.',
-    name: 'Gray Wolf (Yellowstone Winter Packs)',
+    name: 'Gray Wolf',
     scientificName: 'Canis lupus',
     category: 'mammal',
     tagline: 'Ghostly apex predators hunting across snowy thermal valleys.',
@@ -386,9 +386,9 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Bright white neck mane and broad, saucer-like hooves for snow travel'
     ],
     distinguishingTips: 'Only deer species where both sexes grow antlers; white neck mane and forward brow shovel are diagnostic.',
-    name: 'Denali Tundra Autumn & Caribou Rut',
+    name: 'Barren-Ground Caribou',
     scientificName: 'Rangifer tarandus granti',
-    category: 'tree_foliage',
+    category: 'mammal',
     tagline: 'Fiery crimson dwarf birch carpet and velvet-shedding caribou.',
     description: 'During a brief two-week flash in late August and early September, the alpine tundra of Denali National Park turns a breathtaking incandescent crimson, fiery orange, and gold from dwarf birch, blueberry, and bearberry shrubs, while caribou bulls migrate with massive velvet-stripped antlers.',
     states: ['AK'],
@@ -441,19 +441,19 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       ethicalGuidelines: 'Do not create social trails across delicate arctic tundra moss, which is fragile and slow to heal.',
       difficultyRating: 'Moderate Hike',
     },
-    iconName: 'Flame',
-    colorAccent: 'rose',
+    iconName: 'PawPrint',
+    colorAccent: 'amber',
   },
   {
     id: 'sonoran-desert-saguaro-bloom',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Carnegiea_gigantea_in_Saguaro_National_Park_near_Tucson%2C_Arizona_during_November_%2858%29.jpg/960px-Carnegiea_gigantea_in_Saguaro_National_Park_near_Tucson%2C_Arizona_during_November_%2858%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Saguaro_Cactus_Bloom.jpg/960px-Saguaro_Cactus_Bloom.jpg',
     identificationMarks: [
       'Creamy-white waxen petals (3 inches wide) with dense yellow stamens',
       'Clusters exclusively crowned around the apex of stems and upward arms',
       'Heavy melon-like fragrance opening after nightfall'
     ],
     distinguishingTips: 'Blooms crown only the extreme upper tips of giant saguaro cactus arms, opening at night and closing by mid-afternoon.',
-    name: 'Sonoran Desert Saguaro & Spring Superbloom',
+    name: 'Saguaro Cactus Blossom',
     scientificName: 'Carnegiea gigantea & Eschscholzia californica',
     category: 'wildflower',
     tagline: 'Creamy crown blossoms atop giant desert sentinels and gold poppies.',
@@ -580,14 +580,14 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'southern-appalachian-fall-foliage',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Another_view_of_the_Cades_Cove_area_IMG_5004.JPG/960px-Another_view_of_the_Cades_Cove_area_IMG_5004.JPG',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Acer_saccharum_%28213110565%29.jpg/960px-Acer_saccharum_%28213110565%29.jpg',
     identificationMarks: [
       'Rich patchwork mosaic of scarlet red oak, golden sugar maple, and yellow birch',
       'Soft misty blue atmospheric mountain haze ("Blue Ridge")',
       'Deep green evergreen rhododendron understory below blazing canopy'
     ],
     distinguishingTips: 'Unlike western single-species aspen belts, the Appalachians offer over 100 deciduous tree species displaying varied synchronized tones.',
-    name: 'Southern Appalachian Hardwood Autumn',
+    name: 'Sugar Maple (Appalachian Fall)',
     scientificName: 'Acer saccharum, Quercus coccinea, Nyssa sylvatica',
     category: 'tree_foliage',
     tagline: 'Vast layered mountain ridges of fiery red maples, scarlet oaks, and gold birch.',
@@ -870,14 +870,14 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'alpine-wildflower-explosion',
-    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Yankee_Boy_Basin_2006-07-18_%28198530954%29.jpg/960px-Yankee_Boy_Basin_2006-07-18_%28198530954%29.jpg',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Castilleja_miniata_close.jpg/960px-Castilleja_miniata_close.jpg',
     identificationMarks: [
       'Multi-colored dense carpet: scarlet Indian paintbrush, blue larkspur, yellow sneezeweed',
       'Dwarf growth habit to withstand high winds and heavy snow loads',
       'Intense ultraviolet-boosted pigmentation glowing under mountain skies'
     ],
     distinguishingTips: 'Grows in dense dwarf cushion mats and scree corridors strictly above 10,000 ft elevation.',
-    name: 'High Mountain Wildflower Superblooms',
+    name: 'Rocky Mountain Indian Paintbrush',
     scientificName: 'Aquilegia caerulea, Lupinus, Castilleja',
     category: 'wildflower',
     tagline: 'Columbines, Lupines, and Paintbrush blanketing high alpine basins.',
@@ -1022,7 +1022,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Broad 6-to-7 foot wingspan held flat like a plank in soaring flight'
     ],
     distinguishingTips: 'Adult white head and tail is unmistakable; immatures have mottled brown-and-white plumage and lack the golden nape of a Golden Eagle.',
-    name: 'Bald Eagle (Winter Concentrations)',
+    name: 'Bald Eagle',
     scientificName: 'Haliaeetus leucocephalus',
     category: 'bird',
     tagline: 'Dozens of eagles fishing open ice holes and roosting in winter cottonwoods.',
@@ -1089,7 +1089,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Reflections rippling in the Virgin River with sandstone backdrop'
     ],
     distinguishingTips: 'Riparian tree restricted to riverbeds and canyon washes; turns gold in late October to mid-November, well after high-country aspens.',
-    name: 'Zion Canyon & Virgin River Autumn Gold',
+    name: 'Fremont Cottonwood',
     scientificName: 'Populus fremontii',
     category: 'tree_foliage',
     tagline: 'Glowing amber cottonwoods beneath towering 2,000-ft red sandstone walls.',
@@ -1156,7 +1156,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
       'Unmistakable rolling bugle/rattle call echoing across mountain valleys'
     ],
     distinguishingTips: 'Flies with neck held straight out, unlike Herons which fold their necks into an "S" curve.',
-    name: 'Greater Sandhill Crane Migration',
+    name: 'Sandhill Crane',
     scientificName: 'Antigone canadensis tabida',
     category: 'bird',
     tagline: '20,000+ prehistoric dancers staging across western river valleys.',

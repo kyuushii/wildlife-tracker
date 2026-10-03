@@ -47,7 +47,7 @@ export default function HomePage() {
 
   // Filters State
   const [filters, setFilters] = useState<FilterState>({
-    category: 'all',
+    category: 'wildlife',
     selectedState: 'all',
     selectedMonth: null,
     selectedRegion: 'all',
@@ -111,7 +111,15 @@ export default function HomePage() {
   const allFilteredSubjects = useMemo(() => {
     return COLORADO_SUBJECTS.filter(subject => {
       // Category filter
-      if (filters.category !== 'all' && subject.category !== filters.category) {
+      if (filters.category === 'wildlife') {
+        if (subject.category !== 'mammal' && subject.category !== 'bird') {
+          return false;
+        }
+      } else if (filters.category === 'botanical') {
+        if (subject.category !== 'wildflower' && subject.category !== 'tree_foliage') {
+          return false;
+        }
+      } else if (filters.category !== 'all' && subject.category !== filters.category) {
         return false;
       }
 

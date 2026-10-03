@@ -126,7 +126,7 @@ export interface MapBounds {
 }
 
 export interface FilterState {
-  category: SubjectCategory | 'all';
+  category: SubjectCategory | 'all' | 'wildlife' | 'botanical';
   selectedState: string; // 'all' | 'CO' | 'WY' | 'AK' | 'WA' | 'AZ' | 'UT' | 'NC' | 'TN'
   selectedMonth: number | null; // 1-12 or null
   selectedRegion: DestinationRegion | 'all';

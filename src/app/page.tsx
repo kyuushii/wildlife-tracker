@@ -28,6 +28,7 @@ import { FieldLogView } from '@/components/FieldLogView';
 import { ElevationGuideModal } from '@/components/ElevationGuideModal';
 import { SettingsModal } from '@/components/SettingsModal';
 import { NatureMapWrapper } from '@/components/NatureMapWrapper';
+import { ImageLightboxModal } from '@/components/ImageLightboxModal';
 import { 
   Sparkles, 
   Compass, 
@@ -69,6 +70,7 @@ export default function HomePage() {
   // Modals
   const [selectedSubject, setSelectedSubject] = useState<NatureSubject | null>(null);
   const [sightingSubject, setSightingSubject] = useState<NatureSubject | null>(null);
+  const [lightboxSubject, setLightboxSubject] = useState<NatureSubject | null>(null);
   const [isElevationGuideOpen, setIsElevationGuideOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -199,6 +201,23 @@ export default function HomePage() {
       s.phenology.some(p => p.month === currentMonth && p.status === 2)
     );
   }, [currentMonth]);
+
+  // Lightbox Navigation (browsing through current filtered subjects)
+  const currentLightboxIndex = lightboxSubject 
+    ? allFilteredSubjects.findIndex(s => s.id === lightboxSubject.id) 
+    : -1;
+
+  const handleLightboxPrev = () => {
+    if (currentLightboxIndex > 0) {
+      setLightboxSubject(allFilteredSubjects[currentLightboxIndex - 1]);
+    }
+  };
+
+  const handleLightboxNext = () => {
+    if (currentLightboxIndex >= 0 && currentLightboxIndex < allFilteredSubjects.length - 1) {
+      setLightboxSubject(allFilteredSubjects[currentLightboxIndex + 1]);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
@@ -379,6 +398,7 @@ export default function HomePage() {
                           isHighlighted={highlightedSubjectId === subject.id}
                           isFocused={focusedSubjectId === subject.id}
                           onFocusOnMap={(sub) => setFocusedSubjectId(prev => prev === sub.id ? null : sub.id)}
+                          onOpenLightbox={(sub) => setLightboxSubject(sub)}
                         />
                       ))}
                     </div>
@@ -433,6 +453,7 @@ export default function HomePage() {
                           setFocusedSubjectId(prev => prev === sub.id ? null : sub.id);
                           setViewMode('split');
                         }}
+                        onOpenLightbox={(sub) => setLightboxSubject(sub)}
                       />
                     ))}
                   </div>
@@ -481,6 +502,7 @@ export default function HomePage() {
                           isHighlighted={highlightedSubjectId === subject.id}
                           isFocused={focusedSubjectId === subject.id}
                           onFocusOnMap={(sub) => setFocusedSubjectId(prev => prev === sub.id ? null : sub.id)}
+                          onOpenLightbox={(sub) => setLightboxSubject(sub)}
                         />
                       </div>
                     ))}
@@ -524,6 +546,19 @@ export default function HomePage() {
         onAddToPlanner={(sub) => {
           handleToggleBookmark(sub.id);
         }}
+        onOpenLightbox={(sub) => {
+          setLightboxSubject(sub);
+        }}
+      />
+
+      {/* Full-Screen Uncropped Image Lightbox Modal */}
+      <ImageLightboxModal
+        subject={lightboxSubject}
+        onClose={() => setLightboxSubject(null)}
+        onPrev={handleLightboxPrev}
+        onNext={handleLightboxNext}
+        hasPrev={currentLightboxIndex > 0}
+        hasNext={currentLightboxIndex >= 0 && currentLightboxIndex < allFilteredSubjects.length - 1}
       />
 
       {/* Sighting Logger Modal */}

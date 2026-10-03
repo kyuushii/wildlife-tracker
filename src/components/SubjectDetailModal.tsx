@@ -23,7 +23,8 @@ import {
   Globe,
   Eye,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Maximize2
 } from 'lucide-react';
 
 interface SubjectDetailModalProps {
@@ -33,6 +34,7 @@ interface SubjectDetailModalProps {
   onToggleBookmark: (id: string) => void;
   onLogSighting: (subject: NatureSubject) => void;
   onAddToPlanner: (subject: NatureSubject) => void;
+  onOpenLightbox?: (subject: NatureSubject) => void;
 }
 
 export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
@@ -42,6 +44,7 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
   onToggleBookmark,
   onLogSighting,
   onAddToPlanner,
+  onOpenLightbox,
 }) => {
   const [selectedMonthTab, setSelectedMonthTab] = useState<number>(new Date().getMonth() + 1);
 
@@ -123,15 +126,32 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
               </div>
 
               {/* Photo Showcase */}
-              <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl group">
+              <div 
+                onClick={() => onOpenLightbox && onOpenLightbox(subject)}
+                className="relative w-full h-72 sm:h-96 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl group cursor-zoom-in"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={subject.imageUrl}
                   alt={subject.name}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-contain sm:object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+
+                {/* Click to Expand Button */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onOpenLightbox) onOpenLightbox(subject);
+                  }}
+                  className="absolute top-3 right-3 flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-900 text-slate-200 hover:text-white border border-slate-700 text-xs backdrop-blur-md transition shadow-xl"
+                  title="Open full-screen uncropped view"
+                >
+                  <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Full-Screen Uncropped Photo</span>
+                </button>
+
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-slate-200 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/60 pointer-events-none">
                   <span className="font-semibold text-white">{subject.name}</span>
                   <span className="italic text-slate-400 text-[11px] font-mono">{subject.scientificName}</span>

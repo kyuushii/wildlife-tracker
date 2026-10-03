@@ -1,4 +1,5 @@
 import { NatureSubject, DestinationRegion, ElevationBand } from '@/types';
+import { ADDITIONAL_SUBJECTS } from './additional-species';
 
 export const STATE_LABELS: Record<string, string> = {
   all: 'All Destinations & States',
@@ -1198,5 +1199,6 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
     },
     iconName: 'Sparkles',
     colorAccent: 'amber',
-  }
+  },
+  ...ADDITIONAL_SUBJECTS,
 ];

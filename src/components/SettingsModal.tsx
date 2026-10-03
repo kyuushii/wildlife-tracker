@@ -115,6 +115,17 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </p>
         </div>
 
+        {/* Zero API Key Callout */}
+        <div className="bg-emerald-950/30 border border-emerald-500/40 p-4 rounded-2xl flex items-start space-x-3 text-emerald-200">
+          <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+          <div className="text-xs space-y-1">
+            <strong className="font-bold text-emerald-300">No API Key Required!</strong>
+            <p className="text-emerald-200/90 leading-relaxed">
+              The entire application—including the interactive map, species search, filters, trip planner, and personal sighting logs—runs <strong>100% free with zero API keys or accounts</strong>. Everything is saved directly in your browser on this device.
+            </p>
+          </div>
+        </div>
+
         {/* Section 1: Desktop PWA Installation */}
         <div className="bg-slate-950/70 border border-slate-800 p-4 rounded-2xl space-y-2">
           <div className="flex items-center space-x-2 text-xs font-bold text-amber-400">
@@ -126,20 +137,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </p>
         </div>
 
-        {/* Section 2: Supabase Free-Tier Cloud Sync */}
+        {/* Section 2: Supabase Free-Tier Cloud Sync (Optional) */}
         <div className="bg-slate-950/70 border border-slate-800 p-5 rounded-2xl space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400">
               <Database className="w-4 h-4" />
-              <span>Cross-Device Cloud Sync (Supabase)</span>
+              <span>Optional Cloud Sync (Supabase)</span>
             </div>
-            <span className="text-[10px] text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
-              Optional Free Tier
+            <span className="text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30 font-semibold">
+              Optional Only
             </span>
           </div>
 
           <p className="text-xs text-slate-300 leading-relaxed">
-            By default, all your field logs and target lists are stored safely in local offline storage on this machine. If you want automatic real-time sync between your Mac, PC, and phone, provide your free Supabase project credentials below:
+            You do <strong>not</strong> need this to use the app. Only fill this out if you set up a free Supabase project and want automatic multi-device synchronization between your Mac and PC:
           </p>
 
           <form onSubmit={handleSaveSupabase} className="space-y-3">

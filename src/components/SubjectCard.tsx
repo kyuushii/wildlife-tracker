@@ -11,7 +11,8 @@ import {
   PawPrint,
   Feather,
   Flower2,
-  Trees
+  Trees,
+  Crosshair
 } from 'lucide-react';
 
 interface SubjectCardProps {
@@ -23,6 +24,8 @@ interface SubjectCardProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   isHighlighted?: boolean;
+  isFocused?: boolean;
+  onFocusOnMap?: (subject: NatureSubject) => void;
 }
 
 export const SubjectCard: React.FC<SubjectCardProps> = ({
@@ -34,6 +37,8 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
   onMouseEnter,
   onMouseLeave,
   isHighlighted = false,
+  isFocused = false,
+  onFocusOnMap,
 }) => {
   const currentMonth = new Date().getMonth() + 1;
   const targetMonth = activeMonth ?? currentMonth;
@@ -51,13 +56,24 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
     }
   };
 
+  const handleCardClick = () => {
+    if (onFocusOnMap) {
+      onFocusOnMap(subject);
+    } else {
+      onSelectSubject(subject);
+    }
+  };
+
   return (
     <div 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`group relative bg-slate-900/80 hover:bg-slate-900 border rounded-2xl p-5 shadow-lg transition-all duration-200 flex flex-col justify-between ${
-        isHighlighted 
-          ? 'border-emerald-400 ring-2 ring-emerald-500/30 bg-slate-900' 
+      onClick={handleCardClick}
+      className={`group relative bg-slate-900/80 hover:bg-slate-900 border rounded-2xl p-5 shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer ${
+        isFocused
+          ? 'border-emerald-400 ring-2 ring-emerald-400/50 bg-slate-900 shadow-emerald-950/50'
+          : isHighlighted 
+          ? 'border-slate-500 ring-1 ring-slate-400/40 bg-slate-900' 
           : 'border-slate-800 hover:border-slate-700/80'
       }`}
     >
@@ -76,9 +92,16 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
                 {st}
               </span>
             ))}
+
+            {isFocused && (
+              <span className="flex items-center space-x-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500 text-slate-950">
+                <Crosshair className="w-3 h-3" />
+                <span>On Map</span>
+              </span>
+            )}
           </div>
 
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1" onClick={(e) => e.stopPropagation()}>
             {isCurrentPeak && (
               <span className="flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/50 animate-pulse">
                 <Sparkles className="w-3 h-3" />
@@ -87,15 +110,12 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
             )}
             {!isCurrentPeak && isCurrentShoulder && (
               <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                Shoulder / Waning
+                Shoulder
               </span>
             )}
 
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleBookmark(subject.id);
-              }}
+              onClick={() => onToggleBookmark(subject.id)}
               title={isBookmarked ? 'Remove from Saved Targets' : 'Save to Target List'}
               className={`p-2 rounded-xl border transition ${
                 isBookmarked
@@ -109,7 +129,7 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
         </div>
 
         {/* Titles */}
-        <div className="cursor-pointer" onClick={() => onSelectSubject(subject)}>
+        <div>
           <h3 className="text-lg font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">
             {subject.name}
           </h3>
@@ -158,11 +178,9 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
               const isSelected = activeMonth === p.month;
               let bg = 'bg-slate-800/40 text-slate-600 border border-transparent';
               
-              // 1 = Shoulder / Waning / Emerging (Warm Amber/Yellow)
               if (p.status === 1) {
                 bg = 'bg-amber-500/15 text-amber-300 border border-amber-500/40 font-medium';
               }
-              // 2 = Peak Season (Vibrant Emerald Green)
               if (p.status === 2) {
                 bg = 'bg-emerald-500/25 text-emerald-300 border border-emerald-400 font-extrabold shadow-sm shadow-emerald-500/20';
               }
@@ -192,7 +210,7 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
         </div>
       </div>
 
-      {/* Bottom row: Primary Hotspot & Drill-in Button */}
+      {/* Bottom row: Primary Hotspot & Explicit Field Guide button */}
       <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
         <div className="flex items-center space-x-1 text-xs text-slate-400 truncate max-w-[65%]">
           <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -202,8 +220,11 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
         </div>
 
         <button
-          onClick={() => onSelectSubject(subject)}
-          className="flex items-center space-x-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition group/btn shrink-0"
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelectSubject(subject);
+          }}
+          className="flex items-center space-x-1 text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-emerald-400 hover:text-emerald-300 border border-slate-800 transition group/btn shrink-0"
         >
           <span>Field Guide</span>
           <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />

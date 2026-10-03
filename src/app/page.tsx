@@ -58,8 +58,9 @@ export default function HomePage() {
     searchAsMapMoves: true,
   });
 
-  // Hover sync state for map pins
+  // Hover & selection sync state for map pins
   const [highlightedSubjectId, setHighlightedSubjectId] = useState<string | null>(null);
+  const [focusedSubjectId, setFocusedSubjectId] = useState<string | null>(null);
 
   // Local Storage States
   const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
@@ -87,12 +88,23 @@ export default function HomePage() {
     setBookmarkedIds(getBookmarks());
   };
 
-  // Callback from Map when viewport pans/zooms (Zillow style)
+  // Callback from Map when viewport pans/zooms (Zillow style, with change-check to prevent loop)
   const handleBoundsChange = useCallback((bounds: MapBounds) => {
-    setFilters(prev => ({
-      ...prev,
-      mapBounds: bounds,
-    }));
+    setFilters(prev => {
+      if (
+        prev.mapBounds &&
+        Math.abs(prev.mapBounds.southWest.lat - bounds.southWest.lat) < 0.001 &&
+        Math.abs(prev.mapBounds.southWest.lng - bounds.southWest.lng) < 0.001 &&
+        Math.abs(prev.mapBounds.northEast.lat - bounds.northEast.lat) < 0.001 &&
+        Math.abs(prev.mapBounds.northEast.lng - bounds.northEast.lng) < 0.001
+      ) {
+        return prev;
+      }
+      return {
+        ...prev,
+        mapBounds: bounds,
+      };
+    });
   }, []);
 
   // Filter subjects based on criteria (category, state, region, elevation, search, month)
@@ -320,6 +332,9 @@ export default function HomePage() {
                     searchAsMapMoves={filters.searchAsMapMoves}
                     setSearchAsMapMoves={(val) => setFilters(prev => ({ ...prev, searchAsMapMoves: val }))}
                     highlightedSubjectId={highlightedSubjectId}
+                    focusedSubjectId={focusedSubjectId}
+                    onClearFocus={() => setFocusedSubjectId(null)}
+                    onFocusSubject={(id) => setFocusedSubjectId(id)}
                   />
                 </div>
 
@@ -354,6 +369,8 @@ export default function HomePage() {
                           onMouseEnter={() => setHighlightedSubjectId(subject.id)}
                           onMouseLeave={() => setHighlightedSubjectId(null)}
                           isHighlighted={highlightedSubjectId === subject.id}
+                          isFocused={focusedSubjectId === subject.id}
+                          onFocusOnMap={(sub) => setFocusedSubjectId(prev => prev === sub.id ? null : sub.id)}
                         />
                       ))}
                     </div>
@@ -403,6 +420,11 @@ export default function HomePage() {
                         onMouseEnter={() => setHighlightedSubjectId(subject.id)}
                         onMouseLeave={() => setHighlightedSubjectId(null)}
                         isHighlighted={highlightedSubjectId === subject.id}
+                        isFocused={focusedSubjectId === subject.id}
+                        onFocusOnMap={(sub) => {
+                          setFocusedSubjectId(prev => prev === sub.id ? null : sub.id);
+                          setViewMode('split');
+                        }}
                       />
                     ))}
                   </div>
@@ -422,6 +444,9 @@ export default function HomePage() {
                     searchAsMapMoves={filters.searchAsMapMoves}
                     setSearchAsMapMoves={(val) => setFilters(prev => ({ ...prev, searchAsMapMoves: val }))}
                     highlightedSubjectId={highlightedSubjectId}
+                    focusedSubjectId={focusedSubjectId}
+                    onClearFocus={() => setFocusedSubjectId(null)}
+                    onFocusSubject={(id) => setFocusedSubjectId(id)}
                   />
                 </div>
 
@@ -446,6 +471,8 @@ export default function HomePage() {
                           onMouseEnter={() => setHighlightedSubjectId(subject.id)}
                           onMouseLeave={() => setHighlightedSubjectId(null)}
                           isHighlighted={highlightedSubjectId === subject.id}
+                          isFocused={focusedSubjectId === subject.id}
+                          onFocusOnMap={(sub) => setFocusedSubjectId(prev => prev === sub.id ? null : sub.id)}
                         />
                       </div>
                     ))}

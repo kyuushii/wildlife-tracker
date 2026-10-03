@@ -14,6 +14,9 @@ interface NatureMapWrapperProps {
   searchAsMapMoves: boolean;
   setSearchAsMapMoves: (val: boolean) => void;
   highlightedSubjectId: string | null;
+  focusedSubjectId: string | null;
+  onClearFocus: () => void;
+  onFocusSubject: (id: string) => void;
 }
 
 const DynamicNatureMap = dynamic(

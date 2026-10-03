@@ -11,7 +11,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Apex predators of Greater Yellowstone: spring cubs and autumn hyperphagia.',
     description: 'The Greater Yellowstone Ecosystem is the premier lower-48 stronghold for grizzly bears. In May and June, sows emerge with spring cubs into lush meadow valleys. In late August through October, bears enter intense hyperphagia, foraging relentlessly on roots, pine nuts, and carcasses to build winter fat stores.',
-    imageUrl: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/GrizzlyBearJeanBeaufort.jpg/960px-GrizzlyBearJeanBeaufort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Prominent muscular shoulder hump rising clearly above the back line',
       'Concave / dished facial profile with relatively small rounded ears',
@@ -89,7 +89,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Climbing spring cubs and autumn acorn gorges in ancient hardwood & aspen forests.',
     description: 'Black bears thrive across mountainous forests from Colorado’s Gambel oak corridors to Tennessee’s Great Smoky Mountains. Watch for spring cubs learning to scramble up ponderosa and tuliptrees, and massive autumn bruins gorging on acorns and chokecherries.',
-    imageUrl: 'https://images.unsplash.com/photo-1575550959106-5a7defe28b56?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Vancouver_Island_black_bear_%28Ursus_americanus_vancouveri%29_Tofino_4.jpg/960px-Vancouver_Island_black_bear_%28Ursus_americanus_vancouveri%29_Tofino_4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Straight Roman nose profile from forehead to nose tip without a dip',
       'No pronounced shoulder hump; rump is typically higher than the shoulders',
@@ -162,7 +162,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'mountain-lion',
-    imageUrl: 'https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Mountain_Lion_in_Glacier_National_Park.jpg/960px-Mountain_Lion_in_Glacier_National_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Long heavy cylindrical tail with a distinct black tip (one-third of body length)',
       'Uniform tawny to golden-buff coat with white chin and chest',
@@ -240,7 +240,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'bobcat',
-    imageUrl: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Bobcat_at_Columbus_Zoo_Boo.jpg/960px-Bobcat_at_Columbus_Zoo_Boo.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Short bobbed tail (4-6 inches) with black bands and pure white underside on tip',
       'Tufted ears (less than 1 inch tufts) with prominent white spot on back of ears',
@@ -318,7 +318,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'mule-deer',
-    imageUrl: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Mule_buck_elk_creek_m_myatt_%285489214303%29.jpg/960px-Mule_buck_elk_creek_m_myatt_%285489214303%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Very large mule-like ears (approx. three-fourths the length of the head)',
       'Bifurcated (forked) branching antlers forming pairs of "Y" shapes on bucks',
@@ -396,7 +396,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'pronghorn-antelope',
-    imageUrl: 'https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Antilocapra_americana.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Distinctive black curved horns with a forward-pointing prong on bucks',
       'Vibrant reddish-tan coat with bright white belly, neck stripes, and large rump patch',
@@ -474,7 +474,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'red-fox-snow',
-    imageUrl: 'https://images.unsplash.com/photo-1474511320723-9a56873ee67b?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Portrait_of_a_red_fox_in_Rautas_fj%C3%A4llurskog_%28cropped%29.jpg/960px-Portrait_of_a_red_fox_in_Rautas_fj%C3%A4llurskog_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Very bushy tail always tipped in distinct pure white',
       'Black "socks" on the lower legs and black backs on the ears',
@@ -552,7 +552,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'yellow-bellied-marmot',
-    imageUrl: 'https://images.unsplash.com/photo-1500463959177-e0869687df26?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Marmota_flaviventris_%28Yellow_Bellied_Marmot%29%2C_Yosemite_NP_-_Diliff.jpg/960px-Marmota_flaviventris_%28Yellow_Bellied_Marmot%29%2C_Yosemite_NP_-_Diliff.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Chubby, heavy-bodied rodent with grizzled brownish-gray coat and yellowish belly',
       'White band across the bridge of the nose between the eyes',
@@ -630,7 +630,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'black-tailed-prairie-dog',
-    imageUrl: 'https://images.unsplash.com/photo-1569420063901-b552b7dca688?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Cynomys_ludovicianus_%2854906540630%29.jpg/960px-Cynomys_ludovicianus_%2854906540630%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Stout, cylindrical body with short pinkish-buff fur',
       'Distinctive black tip covering the last third of the short tail',
@@ -697,7 +697,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'sea-otter-coastal',
-    imageUrl: 'https://images.unsplash.com/photo-1551986500-bf86ef2049d7?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/02/Sea_Otter_%28Enhydra_lutris%29_%2825169790524%29_crop.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Heavy rounded head with pale cream or silver-gray facial fur on mature adults',
       'Floats on back in marine kelp beds with hind flippers sticking up',
@@ -779,7 +779,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   // ==========================================
   {
     id: 'greater-sage-grouse',
-    imageUrl: 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Centrocercus_urophasianus_-USA_-male-8.jpg/960px-Centrocercus_urophasianus_-USA_-male-8.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Colossal chicken-sized grouse with long, spiked, fan-like pointed tail feathers',
       'Inflatable yellow esophageal air sacs surrounded by white breast ruff on displaying males',
@@ -857,7 +857,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'gunnison-sage-grouse',
-    imageUrl: 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Gunnison_Sage_Grouse_%2847460635881%29_%28cropped%29.jpg/960px-Gunnison_Sage_Grouse_%2847460635881%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Elongated, hair-like black filoplumes extending from the back of the head like a ponytail',
       'Bold white barring across the tail feathers',
@@ -913,7 +913,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'burrowing-owl',
-    imageUrl: 'https://images.unsplash.com/photo-1543549790-8b5f4a028cfb?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Southern_burrowing_owl_%28Athene_cunicularia_cunicularia%29_Colonia.jpg/960px-Southern_burrowing_owl_%28Athene_cunicularia_cunicularia%29_Colonia.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Long, bare-looking stilt legs and very short stubby tail',
       'Piercing lemon-yellow eyes, bold white eyebrows, and white throat collar',
@@ -991,7 +991,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'osprey-fishing',
-    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Osprey_Perched_Snag_Heislerville.jpg/960px-Osprey_Perched_Snag_Heislerville.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Pure white belly and chest with dark chocolate-brown back and wings',
       'Distinctive dark eye stripe extending from the beak through the eye to the neck',
@@ -1069,7 +1069,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'great-blue-heron-rookery',
-    imageUrl: 'https://images.unsplash.com/photo-1520808663317-647b476a81b9?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/GreatBlueHeronInARiver.jpg/960px-GreatBlueHeronInARiver.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Massive size (4 feet tall) with slate-blue body and long slender legs',
       'White face with black plume extending from behind the eye into elegant crest',
@@ -1147,7 +1147,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'broad-tailed-hummingbird',
-    imageUrl: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Male_Broad-tailed_Hummingbird_1.jpg/960px-Male_Broad-tailed_Hummingbird_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Iridescent rose-magenta throat gorget on males',
       'Bright metallic green back and white chest band',
@@ -1225,7 +1225,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'american-dipper',
-    imageUrl: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/AmericanDipper.jpg/960px-AmericanDipper.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Uniform slate-gray chunky body with a short stubby cocked tail',
       'White flashing third eyelid (nictitating membrane) visible when blinking',
@@ -1303,7 +1303,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'mountain-bluebird',
-    imageUrl: 'https://images.unsplash.com/photo-1550853024-fae8cd4be47f?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Mountain_Bluebird.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Unbroken sky-blue to electric cerulean plumage on males with no orange/red',
       'Females soft gray-brown with delicate blue wash on wings and tail',
@@ -1381,7 +1381,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'tufted-puffin-coastal',
-    imageUrl: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Tufted_puffin_%28Fratercula_cirrhata%29_Tofino.jpg/960px-Tufted_puffin_%28Fratercula_cirrhata%29_Tofino.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Sweeping long golden-yellow straw plumes curving back behind white face mask',
       'Massive, laterally compressed fluorescent orange-red bill with yellow plate',
@@ -1463,7 +1463,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   // ==========================================
   {
     id: 'colorado-blue-columbine',
-    imageUrl: 'https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Aquilegia_coerulea_-_Laura_Gaudette_01.jpg/960px-Aquilegia_coerulea_-_Laura_Gaudette_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Five sky-blue to lavender outer sepals surrounding a cup of five pure white petals',
       'Five long, slender straight nectar spurs projecting backward',
@@ -1541,7 +1541,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'beargrass-cascades',
-    imageUrl: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Xerophyllum_tenax_-_Glacier_National_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Stout central stalk (3 to 5 feet tall) topped by dense dome of tiny creamy-white flowers',
       'Huge basal tussock of wiry, grass-like evergreen leaves with rough micro-toothed edges',
@@ -1619,7 +1619,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'desert-spring-superbloom',
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Kaldari_Eschscholzia_californica_01.jpg/960px-Kaldari_Eschscholzia_californica_01.jpg',
     identificationMarks: [
       'Vibrant golden-yellow four-petaled Mexican gold poppies glowing in morning light',
       'Interspersed with purple desert lupines, yellow brittlebush, and pink owl’s clover',
@@ -1702,7 +1702,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Acrobats of the vertical abyss: shaggy white coats and needle-sharp black horns on alpine crags.',
     description: 'Masters of vertical cliff terrain, mountain goats thrive on high precipitous alpine ledges where predators cannot follow. In summer, billies and nannies graze alpine tundra basins in shaggy molting fleece, while playful kids scramble fearlessly across sheer 14,000-ft cliff faces.',
-    imageUrl: 'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Mountain_Goat%2C_Enchantments_Basin.jpg/960px-Mountain_Goat%2C_Enchantments_Basin.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Dense, all-white woolly double coat with a distinctive beard and shoulder crest',
       'Slender, glossy jet-black horns that curve gently backward without spiraling',
@@ -1781,7 +1781,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Snowshoe paws and tufted ears: ghost hunter of subalpine spruce-fir snowpacks.',
     description: 'Specially adapted for deep powder snow, the Canada Lynx is characterized by enormous furry paws that function like snowshoes, dramatic black ear tufts over an inch long, and an abbreviated black-tipped tail. Colorado is home to a successfully reintroduced subalpine population in the San Juan Mountains.',
-    imageUrl: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Canada_lynx_by_Michael_Zahra_%28cropped%29.jpg/960px-Canada_lynx_by_Michael_Zahra_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Very long black ear tufts (over 1 inch) and flared facial ruffs',
       'Enormous, densely furred round paws acting as natural snowshoes',
@@ -1860,7 +1860,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Playful stream acrobats: belly sliding on icy snowbanks and hunting cutthroat trout.',
     description: 'Charming, sleek, and boundlessly energetic, North American river otters have made an inspiring comeback in clean mountain waterways. In winter, they are famous for tobogganing down snowbanks on their bellies into icy plunge holes, surfacing with wriggling trout on frozen river shelves.',
-    imageUrl: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Northern_River_Otter_on_Seedskadee_NWR_%2822802102984%29.jpg/960px-Northern_River_Otter_on_Seedskadee_NWR_%2822802102984%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Streamlined cylindrical body with dense waterproof dark brown pelt',
       'Broad flattened head with long sensitive sensory vibrissae (whiskers)',
@@ -1939,7 +1939,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Fierce prairie excavator: bold black-and-white facial stripes and subterranean burrowing.',
     description: 'Built like a miniature tank with short muscular legs and enormous curved digging claws, the American Badger is the subterranean master of North American grasslands and sagebrush steppe. Often seen hunting cooperatively near coyotes or excavating prairie dog burrows in clouds of flying dirt.',
-    imageUrl: 'https://images.unsplash.com/photo-1575550959106-5a7defe28b56?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Taxidea_taxus_%28Point_Reyes%2C_2007%29.jpg/960px-Taxidea_taxus_%28Point_Reyes%2C_2007%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Bold black-and-white striped facial mask with white stripe extending down snout',
       'Stocky, low-slung flattened body covered in grizzled silvery-gray fur',
@@ -2018,7 +2018,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Tree canopy acrobat: bright inquisitive eyes, silky golden bib, and agile pine jumps.',
     description: 'Weasel-family aristocrats of the ancient subalpine spruce-fir forest, pine martens are lightning-fast canopy climbers with inquisitive fox-like faces and beautiful orange-gold throat patches. In winter, they bound over deep snowbanks and leap between tree branches hunting red squirrels and voles.',
-    imageUrl: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Newfoundland_Pine_Marten.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Warm brown to chocolate silky fur with a brilliant cream to orange throat and chest bib',
       'Sharp, pointed triangular face with large rounded ears and dark alert eyes',
@@ -2097,7 +2097,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'mammal',
     tagline: 'Quilled tree-dweller: perched in snowy ponderosa crowns and willow groves.',
     description: 'Armed with over 30,000 barbed defensive quills, North American porcupines are gentle, slow-moving herbivores of the western forests. In winter, they spend days high in the branches of ponderosa pines and willows feeding on inner bark (cambium), appearing like giant dark silhouettes frosted with rime ice.',
-    imageUrl: 'https://images.unsplash.com/photo-1500463959177-e0869687df26?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/North_American_porcupine_%28Erethizon_dorsatum_nigrescens%29_Yoho.jpg/960px-North_American_porcupine_%28Erethizon_dorsatum_nigrescens%29_Yoho.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Dense body covered in sharp, yellowish-white quills with black tips',
       'Long dark guard hairs that conceal the quills until alarmed',
@@ -2165,7 +2165,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'The Phantom of the North: colossal concentric facial discs and silent snow plunging.',
     description: 'North America’s largest owl by length, the Great Gray Owl is the phantom master of subalpine mountain meadows. With enormous concentric facial discs that act like satellite dishes, they can pinpoint the sound of a vole tunneling under three feet of crusted snow, hovering and plunging face-first through the snowpack.',
-    imageUrl: 'https://images.unsplash.com/photo-1516331138075-f3adc1e149cd?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B0%D1%82%D0%B0%D1%8F_%D0%BD%D0%B5%D1%8F%D1%81%D1%8B%D1%82%D1%8C_%28Strix_nebulosa%2C_m%29%2C_%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%B0%D0%B4.jpg/960px-%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B0%D1%82%D0%B0%D1%8F_%D0%BD%D0%B5%D1%8F%D1%81%D1%8B%D1%82%D1%8C_%28Strix_nebulosa%2C_m%29%2C_%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%B0%D0%B4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Massive circular concentric facial disc with fine dark rings and white "bow-tie" neck marks',
       'Piercing yellow eyes that appear relatively small within the colossal facial disc',
@@ -2233,7 +2233,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'Monarch of western canyon skies: golden nape hackles and 7-foot soaring wingspan.',
     description: 'The Golden Eagle is North America’s premier aerial apex predator. Soaring effortlessly on thermals with a seven-foot wingspan, these massive raptors patrol rugged canyon cliffs, open sagebrush valleys, and alpine ridges, capable of diving at speeds over 150 mph to strike jackrabbits, marmots, and prairie dogs.',
-    imageUrl: 'https://images.unsplash.com/photo-1611689342806-0863700ce1e4?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/015_Wild_Golden_Eagle_in_flight_at_Pfyn-Finges_%28Switzerland%29_Photo_by_Giles_Laurent.jpg/960px-015_Wild_Golden_Eagle_in_flight_at_Pfyn-Finges_%28Switzerland%29_Photo_by_Giles_Laurent.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Luminous golden-buff hackle feathers on the nape of the neck',
       'Rich dark chocolate-brown body with long broad wings slightly upturned in a slight "V" in soaring flight',
@@ -2301,7 +2301,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'Fastest animal on planet earth: 200+ mph aerial stoops off towering canyon monoliths.',
     description: 'Reaching hunting dive speeds exceeding 240 miles per hour, the Peregrine Falcon is nature’s ultimate aerodynamic masterpiece. Nesting on sheer canyon cliffs and granite monoliths, they launch breath-taking high-altitude "stoops" to strike swifts, swallows, and waterfowl in midair.',
-    imageUrl: 'https://images.unsplash.com/photo-1544943910-4c1dc44a0550?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Falco_peregrinus_m_Humber_Bay_Park_Toronto.jpg/960px-Falco_peregrinus_m_Humber_Bay_Park_Toronto.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Bold black helmet and dark malar sideburn stripes framing a white cheek',
       'Slate blue-gray back with finely barred black-and-white chest and belly',
@@ -2369,7 +2369,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'North America’s heaviest native waterfowl: pristine snow-white plumage on steaming thermal rivers.',
     description: 'Weighing over 25 pounds with an eight-foot wingspan, the Trumpeter Swan is North America’s largest native waterfowl. In winter, hundreds gather on the ice-free geothermal rivers of Yellowstone and Grand Teton, their bugling brassy calls echoing against sub-zero steam plumes and snowbound spruce forests.',
-    imageUrl: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Trumpeter_swans_in_winter.jpg/960px-Trumpeter_swans_in_winter.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Massive, entirely snowy-white body with an exceptionally long straight neck',
       'All-black wedge-shaped bill that merges smoothly into the forehead without yellow lore spots',
@@ -2437,7 +2437,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'bird',
     tagline: 'Voice of the northern wilderness: ruby-red eyes, checkered velvet plumage, and haunting yodel calls.',
     description: 'With their haunting, echoing tremolo and yodel calls, Common Loons are the true voice of remote northern lakes. In summer, adults display immaculate black-and-white checkered velvet plumage, a striking iridescent black-green neck necklace, and glowing ruby-red eyes, frequently carrying tiny fuzzy chicks on their backs.',
-    imageUrl: 'https://images.unsplash.com/photo-1555169062-013468b47731?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Gavia_immer_-Minocqua%2C_Wisconsin%2C_USA_-swimming-8.jpg/960px-Gavia_immer_-Minocqua%2C_Wisconsin%2C_USA_-swimming-8.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Striking black-and-white checkered back pattern with striped white neck collar',
       'Glossy velvet black head with intense, luminous ruby-red eyes',
@@ -2505,7 +2505,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'wildflower',
     tagline: 'Elusive gem of the montane forest floor: delicate magenta slipper lip and yellow beard.',
     description: 'Regarded as one of North America’s most exquisite native orchids, the Calypso Orchid or Fairy Slipper blooms for just two to three weeks right after snowmelt on deep, mossy, shaded forest floors. Each plant produces a single jewel-like magenta-pink flower with an inflated shoe-like pouch and a delicate yellow beard.',
-    imageUrl: 'https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Calypso_bulbosa_5493.JPG/960px-Calypso_bulbosa_5493.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Single solitary magenta-pink flower nodding atop a delicate 3-to-6 inch purplish stem',
       'Prominent inflated lower lip resembling a miniature lady’s slipper with purple streaks and yellow beard',
@@ -2573,7 +2573,7 @@ export const ADDITIONAL_SUBJECTS: NatureSubject[] = [
     category: 'wildflower',
     tagline: 'Snow-melting pioneers: brilliant yellow and pure white reflexed petals pushing through alpine snowpacks.',
     description: 'Known as the ultimate snow-melting pioneers, Glacier Lilies (vivid bright yellow) and Avalanche Lilies (radiant pure white) push their flower buds right through the edges of melting alpine snowdrifts. In June and July, entire subalpine meadows become carpeted in tens of thousands of delicate nodding blooms beneath glacier-clad volcano peaks.',
-    imageUrl: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Erythronium_grandiflorum_5077.JPG/960px-Erythronium_grandiflorum_5077.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Gracefully recurved / reflexed petals swept upward like shooting stars',
       'Long prominent protruding stamens with bright red, yellow, or white anthers',

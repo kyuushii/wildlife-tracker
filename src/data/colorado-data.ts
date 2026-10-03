@@ -89,7 +89,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   // Mammals
   {
     id: 'rocky-mountain-elk',
-    imageUrl: 'https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Jasper.Wapiti-Hirsch.P1033401.jpg/960px-Jasper.Wapiti-Hirsch.P1033401.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Large pale buff-yellow rump patch surrounding a short tail',
       'Dark brown shaggy mane on neck and chest contrasted with tan body',
@@ -167,7 +167,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'north-american-bison-rut',
-    imageUrl: 'https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/American_bison_k5680-1.jpg/960px-American_bison_k5680-1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'High shoulder hump and massive lowered triangular head',
       'Short upward-curving black horns on both bulls and cows',
@@ -245,7 +245,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'coastal-brown-bear-salmon',
-    imageUrl: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/A053%2C_Katmai_National_Park%2C_Brooks_Falls%2C_Alaska%2C_USA%2C_bear_and_salmon%2C_2002.jpg',
     identificationMarks: [
       'Prominent muscular shoulder hump used for digging and heavy pawing',
       'Dished concave facial profile with small rounded ears',
@@ -312,7 +312,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'gray-wolf-winter-pack',
-    imageUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Canis_lupus_occidentalis.jpg/960px-Canis_lupus_occidentalis.jpg',
     identificationMarks: [
       'Broad muzzle with triangular face and rounded, shorter ears than a coyote',
       'Massive paws (4-5 inches wide) with deep chest and long legs',
@@ -379,7 +379,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'denali-autumn-tundra-caribou',
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Caribou._Denali_National_Park%2C_Alaska_%2851094337350%29.jpg/960px-Caribou._Denali_National_Park%2C_Alaska_%2851094337350%29.jpg',
     identificationMarks: [
       'Semi-palmate asymmetric antlers present on both bulls and cows',
       'Prominent forward-projecting brow tine shovel over the muzzle',
@@ -446,7 +446,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'sonoran-desert-saguaro-bloom',
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Carnegiea_gigantea_in_Saguaro_National_Park_near_Tucson%2C_Arizona_during_November_%2858%29.jpg/960px-Carnegiea_gigantea_in_Saguaro_National_Park_near_Tucson%2C_Arizona_during_November_%2858%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Creamy-white waxen petals (3 inches wide) with dense yellow stamens',
       'Clusters exclusively crowned around the apex of stems and upward arms',
@@ -513,7 +513,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'synchronous-fireflies-smokies',
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/PhotinusCarolinus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Synchronized yellow-green pulse bursts (5-8 flashes in unison)',
       'Abrupt 6-9 second total blackout intervals between pulses',
@@ -580,7 +580,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'southern-appalachian-fall-foliage',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Another_view_of_the_Cades_Cove_area_IMG_5004.JPG/960px-Another_view_of_the_Cades_Cove_area_IMG_5004.JPG',
     identificationMarks: [
       'Rich patchwork mosaic of scarlet red oak, golden sugar maple, and yellow birch',
       'Soft misty blue atmospheric mountain haze ("Blue Ridge")',
@@ -647,7 +647,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'shiras-moose',
-    imageUrl: 'https://images.unsplash.com/photo-1549480017-d76466a4b7e8?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Alaska_moose.jpg/960px-Alaska_moose.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Massive bulbous pendulous muzzle with a prominent throat dewlap bell',
       'Enormous flattened palmate antlers spanning up to 5 feet on mature bulls',
@@ -725,7 +725,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'rocky-mountain-bighorn-sheep',
-    imageUrl: 'https://images.unsplash.com/photo-1582201942988-13e60e4556ee?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/New_Mexico_Bighorn_Sheep.JPG/960px-New_Mexico_Bighorn_Sheep.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Massive brown spiraling curled horns on rams (full 360-degree curl in mature rams)',
       'Large white rump patch surrounding a short dark brown tail',
@@ -792,7 +792,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'quaking-aspen-foliage',
-    imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Quaking_aspens_in_autumn_on_Tenderfoot_Mountain%2C_Colorado%2C_US.jpg/960px-Quaking_aspens_in_autumn_on_Tenderfoot_Mountain%2C_Colorado%2C_US.jpg',
     identificationMarks: [
       'Flattened leaf petioles that flutter and quake in the slightest mountain breeze',
       'Smooth chalky-white or pale greenish bark with dark eye-shaped branch scars',
@@ -870,7 +870,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'alpine-wildflower-explosion',
-    imageUrl: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Yankee_Boy_Basin_2006-07-18_%28198530954%29.jpg/960px-Yankee_Boy_Basin_2006-07-18_%28198530954%29.jpg',
     identificationMarks: [
       'Multi-colored dense carpet: scarlet Indian paintbrush, blue larkspur, yellow sneezeweed',
       'Dwarf growth habit to withstand high winds and heavy snow loads',
@@ -948,7 +948,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'american-pika',
-    imageUrl: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ochotona_princeps_rockies.JPG/960px-Ochotona_princeps_rockies.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Small egg-shaped body with no visible tail and rounded furry ears',
       'Carries mouthfuls of dried grasses and alpine flowers (haypiles)',
@@ -1015,7 +1015,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'bald-eagle-winter-roost',
-    imageUrl: 'https://images.unsplash.com/photo-1516331138075-f3adc1e149cd?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Bald_eagle_about_to_fly_in_Alaska_%282016%29.jpg/960px-Bald_eagle_about_to_fly_in_Alaska_%282016%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Pure snowy-white head and tail contrasting with dark chocolate-brown body',
       'Massive heavy hooked yellow bill and piercing yellow eyes',
@@ -1082,7 +1082,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'zion-autumn-cottonwoods',
-    imageUrl: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Cottonwood_at_Zion_Lodge.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled',
     identificationMarks: [
       'Luminous golden-amber heart-shaped leaves glowing against 2,000-ft red canyon walls',
       'Deeply furrowed gray bark winding along riparian river channels',
@@ -1149,7 +1149,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'sandhill-crane-migration',
-    imageUrl: 'https://images.unsplash.com/photo-1555169062-013468b47731?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Greater_sandhill_crane_couple.jpg/960px-Greater_sandhill_crane_couple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Tall slate-gray body with bustling red skin crown patch on forehead',
       'Flies with long neck extended straight and legs trailing directly behind',
@@ -1205,7 +1205,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'white-tailed-ptarmigan',
-    imageUrl: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/White-tailed_Ptarmigan%2C_Rocky_Mountains%2C_Alberta.jpg/960px-White-tailed_Ptarmigan%2C_Rocky_Mountains%2C_Alberta.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail',
     identificationMarks: [
       'Pure snowy white winter plumage blending invisibly into snowfields',
       'Mottled gray-brown and white in summer matching lichen-covered granite',
@@ -1261,7 +1261,7 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
   },
   {
     id: 'bristlecone-pine-astro',
-    imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Pinus_aristata_1.jpg/960px-Pinus_aristata_1.jpg',
     identificationMarks: [
       'Twisted, gnarled, wind-sculpted trunks with amber and burgundy polished deadwood',
       'Short stiff needles grouped in bundles of five resembling bottlebrushes',

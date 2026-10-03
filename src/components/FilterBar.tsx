@@ -50,7 +50,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   ];
 
   const handleReset = () => {
-    setFilters({
+    setFilters(prev => ({
+      ...prev,
       category: 'all',
       selectedState: 'all',
       selectedMonth: null,
@@ -58,7 +59,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       selectedElevation: 'all',
       searchQuery: '',
       onlyPeak: false,
-    });
+      mapBounds: null,
+    }));
   };
 
   const isFiltered = 

@@ -12,38 +12,38 @@ export const STATE_LABELS: Record<string, string> = {
   TN: 'Tennessee (Great Smoky Mountains)',
 };
 
-export const REGION_LABELS: Record<DestinationRegion, { label: string; state: string }> = {
+export const REGION_LABELS: Record<DestinationRegion, { label: string; state: string; defaultCenter: [number, number] }> = {
   // Colorado
-  co_rmnp_frontrange: { label: 'Rocky Mountain NP & Front Range', state: 'CO' },
-  co_san_juan: { label: 'San Juan Mountains (Southwest)', state: 'CO' },
-  co_central_rockies: { label: 'Central Rockies (Aspen, Vail, Sawatch)', state: 'CO' },
-  co_north_park: { label: 'North Park & Medicine Bow (Walden)', state: 'CO' },
-  co_san_luis_valley: { label: 'San Luis Valley & Sangre de Cristo', state: 'CO' },
-  co_gunnison_crested_butte: { label: 'Gunnison & Crested Butte', state: 'CO' },
-  co_western_slope: { label: 'Grand Mesa & Western Slope', state: 'CO' },
-  co_eastern_plains: { label: 'Eastern Plains & Grasslands', state: 'CO' },
+  co_rmnp_frontrange: { label: 'Rocky Mountain NP & Front Range', state: 'CO', defaultCenter: [40.3585, -105.5947] },
+  co_san_juan: { label: 'San Juan Mountains (Southwest)', state: 'CO', defaultCenter: [37.9042, -107.5083] },
+  co_central_rockies: { label: 'Central Rockies (Aspen, Vail, Sawatch)', state: 'CO', defaultCenter: [39.1911, -106.8175] },
+  co_north_park: { label: 'North Park & Medicine Bow (Walden)', state: 'CO', defaultCenter: [40.5283, -105.9867] },
+  co_san_luis_valley: { label: 'San Luis Valley & Sangre de Cristo', state: 'CO', defaultCenter: [37.4419, -106.1367] },
+  co_gunnison_crested_butte: { label: 'Gunnison & Crested Butte', state: 'CO', defaultCenter: [38.8572, -107.0989] },
+  co_western_slope: { label: 'Grand Mesa & Western Slope', state: 'CO', defaultCenter: [39.0438, -108.1583] },
+  co_eastern_plains: { label: 'Eastern Plains & Grasslands', state: 'CO', defaultCenter: [39.9472, -104.7578] },
 
   // Wyoming & Montana
-  wy_yellowstone_lamar: { label: 'Yellowstone (Lamar & Hayden Valleys)', state: 'WY' },
-  wy_grand_teton: { label: 'Grand Teton & Jackson Hole (Oxbow Bend)', state: 'WY' },
+  wy_yellowstone_lamar: { label: 'Yellowstone (Lamar & Hayden Valleys)', state: 'WY', defaultCenter: [44.8967, -110.2393] },
+  wy_grand_teton: { label: 'Grand Teton & Jackson Hole (Oxbow Bend)', state: 'WY', defaultCenter: [43.7125, -110.6669] },
 
   // Alaska
-  ak_katmai_brooks: { label: 'Katmai & Brooks Falls (Salmon Runs)', state: 'AK' },
-  ak_denali: { label: 'Denali National Park & Preserve', state: 'AK' },
-  ak_kenai_coastal: { label: 'Kenai Fjords & Coastal Waters', state: 'AK' },
+  ak_katmai_brooks: { label: 'Katmai & Brooks Falls (Salmon Runs)', state: 'AK', defaultCenter: [58.5552, -155.7797] },
+  ak_denali: { label: 'Denali National Park & Preserve', state: 'AK', defaultCenter: [63.5350, -149.9300] },
+  ak_kenai_coastal: { label: 'Kenai Fjords & Coastal Waters', state: 'AK', defaultCenter: [59.8667, -153.0333] },
 
   // Pacific Northwest
-  pnw_olympic_rainforest: { label: 'Olympic Peninsula & Rainforest', state: 'WA' },
-  pnw_cascades_rainier: { label: 'Mount Rainier & North Cascades', state: 'WA' },
+  pnw_olympic_rainforest: { label: 'Olympic Peninsula & Rainforest', state: 'WA', defaultCenter: [47.8021, -123.9015] },
+  pnw_cascades_rainier: { label: 'Mount Rainier & North Cascades', state: 'WA', defaultCenter: [46.7858, -121.7356] },
 
   // Desert Southwest
-  sw_sonoran_desert: { label: 'Sonoran Desert & Saguaro', state: 'AZ' },
-  sw_zion_canyon: { label: 'Zion National Park & Virgin River', state: 'UT' },
-  sw_moab_arches: { label: 'Moab, Arches & Canyonlands', state: 'UT' },
+  sw_sonoran_desert: { label: 'Sonoran Desert & Saguaro', state: 'AZ', defaultCenter: [32.2533, -111.1683] },
+  sw_zion_canyon: { label: 'Zion National Park & Virgin River', state: 'UT', defaultCenter: [37.2500, -112.9600] },
+  sw_moab_arches: { label: 'Moab, Arches & Canyonlands', state: 'UT', defaultCenter: [38.7331, -109.5925] },
 
   // Appalachia
-  app_great_smokies: { label: 'Great Smoky Mountains (Cades Cove, Elkmont)', state: 'TN' },
-  app_blue_ridge: { label: 'Blue Ridge Parkway & High Crags', state: 'NC' },
+  app_great_smokies: { label: 'Great Smoky Mountains (Cades Cove, Elkmont)', state: 'TN', defaultCenter: [35.6547, -83.5808] },
+  app_blue_ridge: { label: 'Blue Ridge Parkway & High Crags', state: 'NC', defaultCenter: [35.7008, -82.3817] },
 };
 
 export const ELEVATION_LABELS: Record<ElevationBand, { name: string; range: string; desc: string }> = {
@@ -121,6 +121,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Roadside turnouts on Trail Ridge Road & Moraine Park.',
         bestTime: 'Dawn (6:00 - 8:30 AM) and Golden Hour (5:00 - 7:00 PM)',
+        lat: 40.3585,
+        lng: -105.5947,
       },
       {
         name: 'Mammoth Hot Springs & Madison River',
@@ -130,6 +132,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Huge harems congregate on park lawns and along river meadows.',
         bestTime: 'Sunrise and dusk',
+        lat: 44.9769,
+        lng: -110.7011,
       },
       {
         name: 'Cataloochee Valley & Oconaluftee',
@@ -139,6 +143,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Reintroduced southern Appalachian herd bugling against autumn hardwoods.',
         bestTime: 'Late afternoon into sunset',
+        lat: 35.6304,
+        lng: -83.0847,
       }
     ],
     photographyGuide: {
@@ -186,6 +192,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Roadside pullovers along Northeast Entrance Road. Open year-round.',
         bestTime: 'Early morning light (6:30 - 9:30 AM) and dusk dust-cloud lighting',
+        lat: 44.8967,
+        lng: -110.2393,
       },
       {
         name: 'Hayden Valley',
@@ -195,6 +203,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Yellowstone River corridor between Canyon and Lake Village.',
         bestTime: 'Golden hour sunset over misty river oxbows',
+        lat: 44.6366,
+        lng: -110.4578,
       },
       {
         name: 'Rocky Mountain Arsenal NWR',
@@ -204,6 +214,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'Wildlife Refuge',
         accessNotes: 'Free 11-mile wildlife auto tour just north of Denver.',
         bestTime: 'Early morning with Denver city skyline backdrop',
+        lat: 39.8166,
+        lng: -104.8519,
       }
     ],
     photographyGuide: {
@@ -251,6 +263,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Floatplane fly-in access from King Salmon or Homer. Dedicated elevated boardwalk viewing platforms.',
         bestTime: 'Morning and mid-afternoon as salmon make high-water leaps',
+        lat: 58.5552,
+        lng: -155.7797,
       },
       {
         name: 'Chinitna Bay & Silver Salmon Creek (Lake Clark NP)',
@@ -260,6 +274,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Fly-in beach landing via wheeled bush planes from Kenai/Soldotna or Homer.',
         bestTime: 'Low tide clamming and evening creek salmon runs',
+        lat: 59.8667,
+        lng: -153.0333,
       }
     ],
     photographyGuide: {
@@ -307,6 +323,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Pullovers between Slough Creek and Pebble Creek. Spotting scopes and high focal lengths standard.',
         bestTime: 'First hour of dawn (listen for pack howls) and last hour of twilight',
+        lat: 44.8967,
+        lng: -110.2393,
       },
       {
         name: 'Blacktail Plateau & Hellroaring Overlook',
@@ -316,6 +334,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Overlooks with wide vistas into traditional winter hunting flats.',
         bestTime: 'Early morning scanning',
+        lat: 44.9450,
+        lng: -110.5840,
       }
     ],
     photographyGuide: {
@@ -363,6 +383,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Denali Park Road via official park transit/tour buses.',
         bestTime: 'Morning light sweeping across braided Toklat & Teklanika river plains',
+        lat: 63.5350,
+        lng: -149.9300,
       },
       {
         name: 'Denali Highway (Paxson to Cantwell)',
@@ -372,6 +394,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'BLM',
         accessNotes: '135-mile gravel road through vast, open, red-carpet tundra wilderness.',
         bestTime: 'All day in soft arctic cloud conditions; spectacular sunrise/sunset',
+        lat: 63.1420,
+        lng: -147.2890,
       }
     ],
     photographyGuide: {
@@ -412,13 +436,15 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
     ],
     hotspots: [
       {
-        name: 'Saguaro National Park (East & West Districts - Tucson)',
+        name: 'Saguaro National Park (West District - Tucson)',
         region: 'sw_sonoran_desert',
         state: 'AZ',
         elevation: '2,600 - 3,200 ft',
         publicLandType: 'National Park',
-        accessNotes: 'Paved Bajada Loop (West) and Cactus Forest Drive (East). Free or America the Beautiful pass.',
+        accessNotes: 'Paved Bajada Loop (West) and Cactus Forest Drive (East).',
         bestTime: 'Sunrise (6:00 - 8:30 AM) when nocturnal flowers remain open for pollinating bats and bees',
+        lat: 32.2533,
+        lng: -111.1683,
       },
       {
         name: 'Picacho Peak State Park',
@@ -428,6 +454,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'State Park',
         accessNotes: 'Famous steep volcanic slopes blanketed in solid yellow sheets of California/Mexican poppies.',
         bestTime: 'Mid-morning as poppies open to the sun',
+        lat: 32.6517,
+        lng: -111.4083,
       }
     ],
     photographyGuide: {
@@ -475,15 +503,19 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Official National Park lottery system permits required for shuttle parking during peak week.',
         bestTime: '9:30 PM to 11:00 PM on warm, humid evenings',
+        lat: 35.6547,
+        lng: -83.5808,
       },
       {
-        name: 'Joyce Kilmer Memorial Forest / Citico Creek',
+        name: 'Joyce Kilmer Memorial Forest',
         region: 'app_blue_ridge',
         state: 'NC',
         elevation: '2,200 - 3,000 ft',
         publicLandType: 'National Forest',
         accessNotes: 'Old growth hardwood forest with dense canopy providing perfect dark conditions.',
         bestTime: 'Total darkness after astronomical twilight',
+        lat: 35.3522,
+        lng: -83.9297,
       }
     ],
     photographyGuide: {
@@ -524,13 +556,15 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
     ],
     hotspots: [
       {
-        name: 'Blue Ridge Parkway (Grandfather Mountain to Craggy Gardens)',
+        name: 'Blue Ridge Parkway (Craggy Gardens to Grandfather Mtn)',
         region: 'app_blue_ridge',
         state: 'NC',
         elevation: '3,500 - 5,900 ft',
         publicLandType: 'National Park',
         accessNotes: 'Scenic highway with dozens of stone overlooks facing layered pastel ridges.',
         bestTime: 'Sunrise and sunset above morning mountain valley fog ("smoke")',
+        lat: 35.7008,
+        lng: -82.3817,
       },
       {
         name: 'Cades Cove & Roaring Fork Motor Nature Trail',
@@ -540,6 +574,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Scenic loops through historic cabin settlements and old growth forest.',
         bestTime: 'Early morning sunrise mist over pasture fences',
+        lat: 35.6025,
+        lng: -83.8111,
       }
     ],
     photographyGuide: {
@@ -587,6 +623,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Dense willow river bottoms beneath the Grand Teton mountain range.',
         bestTime: 'Dawn (6:30 - 8:30 AM) with Teton reflection in still water',
+        lat: 43.7125,
+        lng: -110.6669,
       },
       {
         name: 'State Forest State Park & Walden ("Moose Capital")',
@@ -596,6 +634,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'State Park',
         accessNotes: 'Highway 14 over Cameron Pass. Moose Visitor Center in Gould. Michigan River flats.',
         bestTime: 'Sunrise to 9:00 AM; dusk near beaver ponds',
+        lat: 40.5283,
+        lng: -105.9867,
       },
       {
         name: 'Brainard Lake Recreation Area',
@@ -605,6 +645,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'Roosevelt National Forest near Ward. Timed parking reservation required summer/fall.',
         bestTime: 'Early morning around Mitchell Lake & Long Lake inlets',
+        lat: 40.0783,
+        lng: -105.5769,
       }
     ],
     photographyGuide: {
@@ -652,6 +694,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'State Park',
         accessNotes: 'Dedicated viewing platform with spotting scopes off I-70 Exit 228.',
         bestTime: 'Mid-morning to afternoon as sun warms the south canyon face',
+        lat: 39.7125,
+        lng: -105.6983,
       },
       {
         name: 'Zion Canyon Scenic Drive & Checkerboard Mesa',
@@ -661,6 +705,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Desert bighorns graze the slickrock sandstone benches along UT-9.',
         bestTime: 'Morning and late afternoon against red Navajo sandstone',
+        lat: 37.2500,
+        lng: -112.9600,
       }
     ],
     photographyGuide: {
@@ -708,6 +754,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Iconic reflection of Mt. Moran and golden aspens in the Snake River.',
         bestTime: 'Dead-calm sunrise (6:45 - 7:45 AM) before morning wind ruffles water',
+        lat: 43.8661,
+        lng: -110.5489,
       },
       {
         name: 'Kebler Pass (Gunnison / Crested Butte)',
@@ -717,6 +765,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'Home to the largest contiguous living aspen organism in Colorado.',
         bestTime: 'Backlit morning and late afternoon',
+        lat: 38.8572,
+        lng: -107.0989,
       },
       {
         name: 'Dallas Divide & Last Dollar Road (Telluride / Ridgway)',
@@ -726,6 +776,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'BLM',
         accessNotes: 'Iconic ranch fence foreground with Mt. Sneffels behind golden groves.',
         bestTime: 'Sunrise at Dallas Divide',
+        lat: 38.0936,
+        lng: -107.8825,
       }
     ],
     photographyGuide: {
@@ -773,6 +825,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Paved Skyline Trail through world-famous magenta paintbrush and lupine fields.',
         bestTime: 'Sunrise before crowds; calm water reflections',
+        lat: 46.7858,
+        lng: -121.7356,
       },
       {
         name: 'Rustler Gulch & Washington Gulch (Crested Butte)',
@@ -782,6 +836,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'Wildflower Capital of Colorado. High clearance AWD recommended.',
         bestTime: 'Early morning calm (6:30 - 9:30 AM)',
+        lat: 38.9950,
+        lng: -106.9850,
       },
       {
         name: 'American Basin & Yankee Boy Basin (Ouray / Silverton)',
@@ -791,6 +847,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'BLM',
         accessNotes: '4WD high-clearance road required. Renowned for dense carpets of Colorado Blue Columbines.',
         bestTime: 'Morning light against rugged 13,000-foot volcanic peaks',
+        lat: 37.9042,
+        lng: -107.5083,
       }
     ],
     photographyGuide: {
@@ -838,6 +896,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'US Highway 6 summit parking lot. Talus fields immediately adjacent to the trailhead.',
         bestTime: 'Morning before alpine thunderstorms build (7:00 - 11:00 AM)',
+        lat: 39.6636,
+        lng: -105.8792,
       },
       {
         name: 'Sunrise Rim Trail (Mount Rainier)',
@@ -847,6 +907,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Volcanic talus slopes along the Sourdough Ridge Trail.',
         bestTime: 'Morning sun warming the talus',
+        lat: 46.9142,
+        lng: -121.6428,
       }
     ],
     photographyGuide: {
@@ -894,6 +956,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'State Park',
         accessNotes: 'World’s largest congregation of bald eagles (3,000+) along Council Grounds in November.',
         bestTime: 'Morning light on river sandbars',
+        lat: 59.3900,
+        lng: -135.8800,
       },
       {
         name: 'Barr Lake State Park',
@@ -903,6 +967,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'State Park',
         accessNotes: 'Observation boardwalk and gazebo with winter roosts in tall cottonwoods.',
         bestTime: 'Morning light on cottonwoods; hunting over open water',
+        lat: 39.9472,
+        lng: -104.7578,
       }
     ],
     photographyGuide: {
@@ -950,6 +1016,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Zion Canyon Shuttle to Temple of Sinawava. Flat paved river walk.',
         bestTime: 'Reflected light (10:00 AM - 2:00 PM) when sun hits opposing red cliffs',
+        lat: 37.2853,
+        lng: -112.9475,
       },
       {
         name: 'Canyon Junction Bridge (The Watchman Sunset)',
@@ -959,6 +1027,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Park',
         accessNotes: 'Iconic view looking south over the Virgin River with The Watchman peak glowing red.',
         bestTime: 'Sunset into dusk blue hour',
+        lat: 37.2000,
+        lng: -112.9800,
       }
     ],
     photographyGuide: {
@@ -1006,6 +1076,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'Wildlife Refuge',
         accessNotes: 'Auto Tour Route with dedicated viewing pullovers off Highway 15.',
         bestTime: 'Sunrise "fly-out" (6:30 - 7:30 AM) and sunset "fly-in" roosting (5:30 - 6:45 PM)',
+        lat: 37.4419,
+        lng: -106.1367,
       }
     ],
     photographyGuide: {
@@ -1053,6 +1125,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'Look along wind-scoured willow bushes near the high mountain passes.',
         bestTime: 'Sunny winter mornings when shadows help outline white birds on snow',
+        lat: 39.5950,
+        lng: -105.7114,
       }
     ],
     photographyGuide: {
@@ -1100,6 +1174,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'Interpretive trail through 1,500-2,000 year old trees.',
         bestTime: 'Nighttime new moon astrophotography; twilight silhouettes',
+        lat: 39.6389,
+        lng: -105.6017,
       },
       {
         name: 'Windy Ridge Bristlecone Pine Scenic Area (Alma)',
@@ -1109,6 +1185,8 @@ export const COLORADO_SUBJECTS: NatureSubject[] = [
         publicLandType: 'National Forest',
         accessNotes: 'Dramatic one-sided "flag" trees shaped by centuries of westerly winds.',
         bestTime: 'Sunset into astronomical twilight',
+        lat: 39.3800,
+        lng: -106.0700,
       }
     ],
     photographyGuide: {

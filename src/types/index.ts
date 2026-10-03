@@ -62,7 +62,8 @@ export interface Hotspot {
   publicLandType: 'National Park' | 'National Forest' | 'State Park' | 'Wildlife Refuge' | 'Wilderness Area' | 'BLM' | 'National Monument';
   accessNotes: string;
   bestTime: string;
-  coordinates?: string;
+  lat: number;
+  lng: number;
 }
 
 export interface PhotographyGuide {
@@ -80,7 +81,7 @@ export interface NatureSubject {
   category: SubjectCategory;
   tagline: string;
   description: string;
-  states: string[]; // e.g. ["CO", "WY", "MT"]
+  states: string[];
   elevationBands: ElevationBand[];
   regions: DestinationRegion[];
   phenology: MonthPhenology[];
@@ -116,6 +117,11 @@ export interface TripTarget {
   createdAt: string;
 }
 
+export interface MapBounds {
+  southWest: { lat: number; lng: number };
+  northEast: { lat: number; lng: number };
+}
+
 export interface FilterState {
   category: SubjectCategory | 'all';
   selectedState: string; // 'all' | 'CO' | 'WY' | 'AK' | 'WA' | 'AZ' | 'UT' | 'NC' | 'TN'
@@ -124,4 +130,6 @@ export interface FilterState {
   selectedElevation: ElevationBand | 'all';
   searchQuery: string;
   onlyPeak: boolean;
+  mapBounds: MapBounds | null;
+  searchAsMapMoves: boolean;
 }

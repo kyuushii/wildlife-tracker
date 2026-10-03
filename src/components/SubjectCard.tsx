@@ -6,7 +6,6 @@ import { MONTH_ABBR, ELEVATION_LABELS } from '@/data/colorado-data';
 import { 
   Bookmark, 
   MapPin, 
-  Camera, 
   ChevronRight, 
   Sparkles,
   PawPrint,
@@ -21,6 +20,9 @@ interface SubjectCardProps {
   onToggleBookmark: (id: string) => void;
   onSelectSubject: (subject: NatureSubject) => void;
   activeMonth: number | null;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  isHighlighted?: boolean;
 }
 
 export const SubjectCard: React.FC<SubjectCardProps> = ({
@@ -29,6 +31,9 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
   onToggleBookmark,
   onSelectSubject,
   activeMonth,
+  onMouseEnter,
+  onMouseLeave,
+  isHighlighted = false,
 }) => {
   const currentMonth = new Date().getMonth() + 1;
   const targetMonth = activeMonth ?? currentMonth;
@@ -46,7 +51,15 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
   };
 
   return (
-    <div className="group relative bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700/80 rounded-2xl p-5 shadow-lg transition-all duration-200 flex flex-col justify-between">
+    <div 
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={`group relative bg-slate-900/80 hover:bg-slate-900 border rounded-2xl p-5 shadow-lg transition-all duration-200 flex flex-col justify-between ${
+        isHighlighted 
+          ? 'border-emerald-400 ring-2 ring-emerald-500/30 bg-slate-900' 
+          : 'border-slate-800 hover:border-slate-700/80'
+      }`}
+    >
       {/* Top row: Category & State Badges & Bookmark */}
       <div>
         <div className="flex items-center justify-between gap-2 mb-3">

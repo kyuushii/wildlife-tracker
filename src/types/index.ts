@@ -1,35 +1,65 @@
 export type SubjectCategory = 'mammal' | 'bird' | 'wildflower' | 'tree_foliage';
 
 export type ElevationBand = 
-  | 'plains'      // < 6,000 ft
-  | 'foothills'   // 6,000 - 8,000 ft
-  | 'montane'     // 8,000 - 10,000 ft
-  | 'subalpine'   // 10,000 - 11,500 ft
-  | 'alpine';     // > 11,500 ft (treeline & tundra)
+  | 'plains'      // Lowland, coastal, or plains (< 6,000 ft in Rockies / sea level to lowlands)
+  | 'foothills'   // Low mountain valleys / foothills (6,000 - 8,000 ft)
+  | 'montane'     // Montane forest (8,000 - 10,000 ft)
+  | 'subalpine'   // Subalpine forests / high tarns (10,000 - 11,500 ft)
+  | 'alpine';     // Alpine tundra above treeline (> 11,500 ft in Rockies / high altitude)
 
-export type ColoradoRegion =
-  | 'rmnp_frontrange'        // Rocky Mountain NP, Estes Park, Front Range Foothills
-  | 'san_juan'               // Ouray, Silverton, Telluride, Lake City
-  | 'central_rockies'        // Aspen, Vail, Breckenridge, Sawatch Range
-  | 'north_park'             // Walden, State Forest State Park (Moose Capital)
-  | 'san_luis_valley'        // Monte Vista NWR, Great Sand Dunes
-  | 'gunnison_crested_butte' // Crested Butte, Kebler Pass, Taylor Park
-  | 'western_slope'          // Grand Mesa, Colorado National Monument
-  | 'eastern_plains';        // Pawnee National Grasslands, Barr Lake, Arkansas Valley
+export type DestinationRegion =
+  // Colorado
+  | 'co_rmnp_frontrange'
+  | 'co_san_juan'
+  | 'co_central_rockies'
+  | 'co_north_park'
+  | 'co_san_luis_valley'
+  | 'co_gunnison_crested_butte'
+  | 'co_western_slope'
+  | 'co_eastern_plains'
+  // Greater Yellowstone & Wyoming / Montana
+  | 'wy_yellowstone_lamar'
+  | 'wy_grand_teton'
+  // Alaska
+  | 'ak_katmai_brooks'
+  | 'ak_denali'
+  | 'ak_kenai_coastal'
+  // Pacific Northwest
+  | 'pnw_olympic_rainforest'
+  | 'pnw_cascades_rainier'
+  // Desert Southwest
+  | 'sw_sonoran_desert'
+  | 'sw_zion_canyon'
+  | 'sw_moab_arches'
+  // Appalachia & Great Smokies
+  | 'app_great_smokies'
+  | 'app_blue_ridge';
+
+export type StateOrZone = 
+  | 'ALL'
+  | 'CO' 
+  | 'WY' 
+  | 'AK' 
+  | 'WA' 
+  | 'AZ' 
+  | 'UT' 
+  | 'NC' 
+  | 'TN';
 
 export type MonthStatus = 0 | 1 | 2; // 0: Dormant/Absent, 1: Present/Active, 2: Peak Photography Window
 
 export interface MonthPhenology {
   month: number; // 1-12
   status: MonthStatus;
-  keyActivity: string; // e.g., "Bugling & Harems", "Alpine Tundra Bloom", "Velvet Antlers"
+  keyActivity: string;
 }
 
 export interface Hotspot {
   name: string;
-  region: ColoradoRegion;
-  elevation: string;
-  publicLandType: 'National Park' | 'National Forest' | 'State Park' | 'Wildlife Refuge' | 'Wilderness Area' | 'BLM';
+  region: DestinationRegion;
+  state: string; // e.g. "CO", "WY", "AK", "NC"
+  elevation?: string;
+  publicLandType: 'National Park' | 'National Forest' | 'State Park' | 'Wildlife Refuge' | 'Wilderness Area' | 'BLM' | 'National Monument';
   accessNotes: string;
   bestTime: string;
   coordinates?: string;
@@ -50,10 +80,11 @@ export interface NatureSubject {
   category: SubjectCategory;
   tagline: string;
   description: string;
+  states: string[]; // e.g. ["CO", "WY", "MT"]
   elevationBands: ElevationBand[];
-  regions: ColoradoRegion[];
+  regions: DestinationRegion[];
   phenology: MonthPhenology[];
-  peakMonths: number[]; // e.g. [9, 10] for Elk Rut
+  peakMonths: number[];
   keyEvents: string[];
   hotspots: Hotspot[];
   photographyGuide: PhotographyGuide;
@@ -66,6 +97,7 @@ export interface UserSighting {
   subjectId: string;
   subjectName: string;
   date: string;
+  stateOrRegion?: string;
   locationName: string;
   elevationFt?: number;
   gearNotes?: string;
@@ -78,7 +110,7 @@ export interface TripTarget {
   id: string;
   subjectId: string;
   targetMonth: number;
-  targetRegion: ColoradoRegion;
+  targetRegion: string;
   notes: string;
   completed: boolean;
   createdAt: string;
@@ -86,8 +118,9 @@ export interface TripTarget {
 
 export interface FilterState {
   category: SubjectCategory | 'all';
-  selectedMonth: number | null; // 1-12 or null (all months)
-  selectedRegion: ColoradoRegion | 'all';
+  selectedState: string; // 'all' | 'CO' | 'WY' | 'AK' | 'WA' | 'AZ' | 'UT' | 'NC' | 'TN'
+  selectedMonth: number | null; // 1-12 or null
+  selectedRegion: DestinationRegion | 'all';
   selectedElevation: ElevationBand | 'all';
   searchQuery: string;
   onlyPeak: boolean;

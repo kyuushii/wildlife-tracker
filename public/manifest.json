@@ -1,7 +1,7 @@
 {
-  "name": "Colorado Nature & Wildlife Photography Season Tracker",
-  "short_name": "CO Photo Seasons",
-  "description": "Track Colorado animal seasons, rutting, migrations, and wildflower/foliage blooms for nature photography.",
+  "name": "WildSeason: Wildlife & Nature Photography Season Tracker",
+  "short_name": "WildSeason",
+  "description": "Track animal seasons, rutting, migrations, and wildflower/foliage blooms across North America for nature photography.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#020617",

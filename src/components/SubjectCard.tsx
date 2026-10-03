@@ -47,12 +47,21 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
 
   return (
     <div className="group relative bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700/80 rounded-2xl p-5 shadow-lg transition-all duration-200 flex flex-col justify-between">
-      {/* Top row: Category & Bookmark */}
+      {/* Top row: Category & State Badges & Bookmark */}
       <div>
         <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800 text-xs font-medium text-slate-300">
-            {getCategoryIcon(subject.category)}
-            <span className="capitalize">{subject.category.replace('_', ' ')}</span>
+          <div className="flex items-center space-x-1.5 flex-wrap gap-1">
+            <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800 text-xs font-medium text-slate-300">
+              {getCategoryIcon(subject.category)}
+              <span className="capitalize">{subject.category.replace('_', ' ')}</span>
+            </div>
+
+            {/* State Badges */}
+            {subject.states?.slice(0, 3).map(st => (
+              <span key={st} className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-950 text-emerald-400 border border-emerald-900/60">
+                {st}
+              </span>
+            ))}
           </div>
 
           <div className="flex items-center space-x-1">
@@ -155,7 +164,9 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
       <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
         <div className="flex items-center space-x-1 text-xs text-slate-400 truncate max-w-[65%]">
           <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span className="truncate">{subject.hotspots[0]?.name || 'Colorado High Country'}</span>
+          <span className="truncate">
+            {subject.hotspots[0]?.name ? `${subject.hotspots[0].name} (${subject.hotspots[0].state})` : 'Wilderness'}
+          </span>
         </div>
 
         <button

@@ -18,9 +18,9 @@ import {
   PlusCircle, 
   Sparkles, 
   Compass, 
-  CheckCircle,
   Layers,
-  Calendar
+  Calendar,
+  Globe
 } from 'lucide-react';
 
 interface SubjectDetailModalProps {
@@ -68,6 +68,11 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
             <span className="text-xs text-slate-400 font-mono italic">
               {subject.scientificName}
             </span>
+            {subject.states?.map(st => (
+              <span key={st} className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-950 text-amber-300 border border-amber-500/30">
+                {st}
+              </span>
+            ))}
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
@@ -117,7 +122,7 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
                 <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 mb-2">
                   <Layers className="w-4 h-4" />
-                  <span>Elevation Bands</span>
+                  <span>Elevation & Habitat Bands</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {subject.elevationBands.map(band => (
@@ -132,12 +137,13 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
                 <div className="flex items-center space-x-2 text-xs font-semibold text-amber-400 mb-2">
                   <MapPin className="w-4 h-4" />
-                  <span>Primary Colorado Regions</span>
+                  <span>Primary Parks & Natural Regions</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {subject.regions.map(r => (
                     <span key={r} className="text-xs bg-slate-900 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-800">
-                      {REGION_LABELS[r]}
+                      <strong className="text-emerald-400 mr-1">[{REGION_LABELS[r]?.state}]</strong>
+                      {REGION_LABELS[r]?.label || r}
                     </span>
                   ))}
                 </div>
@@ -243,7 +249,7 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
             <div className="bg-amber-950/20 border border-amber-500/30 p-4 rounded-2xl flex items-start space-x-3 text-amber-200">
               <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
               <div className="text-xs space-y-1">
-                <strong className="font-semibold text-amber-300">Colorado Wildlife & Alpine Ethics (CPW):</strong>
+                <strong className="font-semibold text-amber-300">Wildlife & Wilderness Ethics:</strong>
                 <p className="text-amber-200/90 leading-relaxed">
                   {subject.photographyGuide.ethicalGuidelines}
                 </p>
@@ -255,7 +261,7 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
           <div className="pt-6 space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
               <Compass className="w-4 h-4 text-emerald-400" />
-              <span>Curated Colorado Hotspots</span>
+              <span>Curated Public Land Hotspots</span>
             </h3>
 
             <div className="space-y-3">
@@ -264,11 +270,16 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center space-x-2">
                       <span className="font-bold text-slate-100 text-sm">{spot.name}</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                        {spot.state}
+                      </span>
                       <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">
                         {spot.publicLandType}
                       </span>
                     </div>
-                    <span className="text-xs font-mono text-slate-400">Elevation: {spot.elevation}</span>
+                    {spot.elevation && (
+                      <span className="text-xs font-mono text-slate-400">Elevation: {spot.elevation}</span>
+                    )}
                   </div>
 
                   <p className="text-xs text-slate-300 leading-relaxed">
@@ -288,7 +299,7 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
         {/* Modal Footer */}
         <div className="p-4 sm:p-5 bg-slate-950 border-t border-slate-800 flex items-center justify-between">
           <div className="text-xs text-slate-400">
-            Colorado Nature Field Guide
+            WildSeason Nature Field Guide
           </div>
           <button
             onClick={onClose}

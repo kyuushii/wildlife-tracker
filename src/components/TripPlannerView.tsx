@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { NatureSubject } from '@/types';
-import { COLORADO_SUBJECTS, MONTH_NAMES, REGION_LABELS } from '@/data/colorado-data';
+import { COLORADO_SUBJECTS, MONTH_NAMES } from '@/data/colorado-data';
 import { 
   Calendar, 
   MapPin, 
@@ -13,7 +13,6 @@ import {
   Bookmark, 
   Sparkles,
   Compass,
-  Layers,
   ChevronRight
 } from 'lucide-react';
 
@@ -57,10 +56,10 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
             <span>Expedition & Shoot Planner</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-            Colorado Scouting Itinerary
+            Field Scouting Itinerary
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            {bookmarkedSubjects.length} targets saved for upcoming photography trips
+            {bookmarkedSubjects.length} target species & blooms saved for upcoming photography expeditions
           </p>
         </div>
 
@@ -128,7 +127,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
             className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-lg shadow-emerald-950"
           >
             <Sparkles className="w-4 h-4" />
-            <span>Explore Colorado Subjects</span>
+            <span>Explore Nature Subjects</span>
           </button>
         </div>
       ) : (
@@ -159,13 +158,18 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
                       </button>
 
                       <div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 flex-wrap">
                           <h4 className={`text-base font-bold text-white ${isChecked ? 'line-through text-slate-400' : ''}`}>
                             {s.name}
                           </h4>
                           <span className="text-xs italic text-slate-400 font-mono hidden sm:inline">
                             {s.scientificName}
                           </span>
+                          {s.states?.map(st => (
+                            <span key={st} className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-slate-950 text-emerald-400 border border-emerald-900/50">
+                              {st}
+                            </span>
+                          ))}
                         </div>
                         <p className="text-xs text-slate-300 mt-0.5">
                           {s.tagline}
@@ -200,7 +204,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
                         <span>Recommended Locations</span>
                       </span>
                       <p className="text-slate-300">
-                        {s.hotspots.map(h => h.name).join(' • ')}
+                        {s.hotspots.map(h => `${h.name} (${h.state})`).join(' • ')}
                       </p>
                     </div>
 
@@ -223,16 +227,16 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
           <div className="bg-slate-950/80 border border-slate-800 rounded-3xl p-6 space-y-3 print:border-black">
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center space-x-2">
               <Compass className="w-4 h-4 text-emerald-400" />
-              <span>Colorado High-Country Photography Field Kit Checklist</span>
+              <span>Wildlife & Nature Photography Field Kit Checklist</span>
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs text-slate-300">
               <label className="flex items-center space-x-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
                 <input type="checkbox" className="rounded text-emerald-500 accent-emerald-500" />
-                <span>Heavy-duty carbon fiber tripod</span>
+                <span>Heavy-duty tripod + gimbal / fluid head</span>
               </label>
               <label className="flex items-center space-x-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
                 <input type="checkbox" className="rounded text-emerald-500 accent-emerald-500" />
-                <span>Spare camera batteries (cold drains 40% faster)</span>
+                <span>Spare cold-weather camera batteries (keep warm in inner pocket)</span>
               </label>
               <label className="flex items-center space-x-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
                 <input type="checkbox" className="rounded text-emerald-500 accent-emerald-500" />
@@ -240,15 +244,15 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
               </label>
               <label className="flex items-center space-x-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
                 <input type="checkbox" className="rounded text-emerald-500 accent-emerald-500" />
-                <span>Lens rain/dust storm sleeve</span>
+                <span>All-weather lens rain & dust storm cover</span>
               </label>
               <label className="flex items-center space-x-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
                 <input type="checkbox" className="rounded text-emerald-500 accent-emerald-500" />
-                <span>Red-light headlamp for blue hour & astro</span>
+                <span>Red-light headlamp for blue hour & nocturnal shoots</span>
               </label>
               <label className="flex items-center space-x-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
                 <input type="checkbox" className="rounded text-emerald-500 accent-emerald-500" />
-                <span>EPA-approved bear spray with holster</span>
+                <span>EPA-approved bear spray with holster (Rockies/Yellowstone/AK)</span>
               </label>
             </div>
           </div>

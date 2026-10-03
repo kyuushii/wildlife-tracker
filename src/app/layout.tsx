@@ -20,8 +20,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Colorado Nature & Wildlife Photography Season Tracker',
-  description: 'Scout Colorado animal seasons (elk rut, moose velvet, bighorn clashes, pika haying) and vegetation blooms (alpine columbine, quaking aspen gold) with elevation filtering and photography field guides.',
+  title: 'WildSeason: Wildlife & Nature Photography Season Tracker',
+  description: 'Scout North American animal seasons (elk & bison rut, brown bear salmon runs, moose velvet, wolf packs) and vegetation blooms (alpine wildflowers, aspen & hardwood fall gold) with habitat elevation filtering and photography field guides.',
   manifest: '/manifest.json',
   icons: {
     icon: '/favicon.ico',

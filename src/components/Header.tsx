@@ -34,17 +34,17 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between h-16">
           {/* Logo & Title */}
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('explore')}>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-amber-600 flex items-center justify-center shadow-lg shadow-emerald-900/30 border border-emerald-400/30">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 via-teal-600 to-amber-600 flex items-center justify-center shadow-lg shadow-emerald-900/30 border border-emerald-400/30">
               <Compass className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-lg text-slate-100 tracking-tight">Colorado Nature</span>
-                <span className="px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                <span className="font-bold text-lg text-slate-100 tracking-tight">WildSeason</span>
+                <span className="px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                   Field Guide
                 </span>
               </div>
-              <p className="text-xs text-slate-400 hidden sm:block">Wildlife & Botanical Phenology for Photographers</p>
+              <p className="text-xs text-slate-400 hidden sm:block">Nature, Wildlife & Botanical Phenology for Photographers</p>
             </div>
           </div>
 
@@ -101,14 +101,14 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center space-x-2">
             <button
               onClick={onOpenElevationGuide}
-              title="Elevation Zones Guide"
+              title="Habitat & Elevation Zones Guide"
               className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition"
             >
               <Layers className="w-4 h-4" />
             </button>
             <button
               onClick={onOpenSettings}
-              title="Sync & Data Settings"
+              title="Cloud Sync & Data Settings"
               className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition"
             >
               <SettingsIcon className="w-4 h-4" />

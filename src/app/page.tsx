@@ -10,7 +10,8 @@ import {
 import { 
   COLORADO_SUBJECTS, 
   MONTH_NAMES, 
-  MONTH_ABBR 
+  MONTH_ABBR,
+  STATE_LABELS
 } from '@/data/colorado-data';
 import { 
   getBookmarks, 
@@ -29,11 +30,8 @@ import { SettingsModal } from '@/components/SettingsModal';
 import { 
   Sparkles, 
   Compass, 
-  Calendar, 
-  Camera, 
   ArrowRight,
-  TrendingUp,
-  MapPin
+  Globe
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -45,6 +43,7 @@ export default function HomePage() {
   // Filters State
   const [filters, setFilters] = useState<FilterState>({
     category: 'all',
+    selectedState: 'all',
     selectedMonth: null,
     selectedRegion: 'all',
     selectedElevation: 'all',
@@ -86,7 +85,12 @@ export default function HomePage() {
         return false;
       }
 
-      // Region filter
+      // State / Destination filter
+      if (filters.selectedState !== 'all' && !subject.states?.includes(filters.selectedState)) {
+        return false;
+      }
+
+      // Specific Region filter
       if (filters.selectedRegion !== 'all' && !subject.regions.includes(filters.selectedRegion)) {
         return false;
       }
@@ -106,22 +110,24 @@ export default function HomePage() {
           return false;
         }
       } else if (filters.onlyPeak) {
-        // If no specific month selected, ensure it has at least one peak month
         if (subject.peakMonths.length === 0) {
           return false;
         }
       }
 
-      // Search query filter (matches name, scientific name, hotspot, or description)
+      // Search query filter (matches name, scientific name, hotspot, state, or description)
       if (filters.searchQuery.trim() !== '') {
         const q = filters.searchQuery.toLowerCase();
         const matchesName = subject.name.toLowerCase().includes(q);
         const matchesSci = subject.scientificName.toLowerCase().includes(q);
         const matchesTagline = subject.tagline.toLowerCase().includes(q);
+        const matchesState = subject.states?.some(st => st.toLowerCase().includes(q));
         const matchesHotspot = subject.hotspots.some(h => 
-          h.name.toLowerCase().includes(q) || h.accessNotes.toLowerCase().includes(q)
+          h.name.toLowerCase().includes(q) || 
+          h.accessNotes.toLowerCase().includes(q) ||
+          h.state.toLowerCase().includes(q)
         );
-        if (!matchesName && !matchesSci && !matchesTagline && !matchesHotspot) {
+        if (!matchesName && !matchesSci && !matchesTagline && !matchesHotspot && !matchesState) {
           return false;
         }
       }
@@ -160,13 +166,13 @@ export default function HomePage() {
                 <div className="space-y-2 max-w-2xl">
                   <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400">
                     <Sparkles className="w-4 h-4" />
-                    <span>Colorado Field Intelligence • {MONTH_NAMES[currentMonth - 1]} Season</span>
+                    <span>WildSeason Field Intelligence • {MONTH_NAMES[currentMonth - 1]} Season</span>
                   </div>
                   <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    {currentMonthPeaking.length} High-Country Subjects Peaking This Month
+                    {currentMonthPeaking.length} Premier Photography Subjects Peaking This Month
                   </h1>
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Filter by elevation zones from Front Range foothills to 12,000+ ft alpine tundra. Drill into detailed phenology calendars, lens recommendations, and prime public land locations.
+                    Filter by destination (Colorado, Yellowstone, Alaska, Desert SW, Pacific NW, Smokies), habitat elevation zones, and life cycles. Drill into annual phenology calendars, lens recommendations, and prime public land locations.
                   </p>
                 </div>
 
@@ -189,7 +195,7 @@ export default function HomePage() {
                     className="flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-xs font-semibold transition"
                   >
                     <Compass className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Elevation Zones Guide</span>
+                    <span>Elevation & Habitats Guide</span>
                   </button>
                 </div>
               </div>
@@ -210,11 +216,12 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-lg font-bold text-white">No Subjects Match Your Filter Criteria</h3>
                 <p className="text-xs sm:text-sm text-slate-400">
-                  Try clearing the elevation band, changing the month, or resetting the search query to discover more Colorado wildlife and flora.
+                  Try switching the destination state to "All Regions", clearing the elevation band, or resetting the search query.
                 </p>
                 <button
                   onClick={() => setFilters({
                     category: 'all',
+                    selectedState: 'all',
                     selectedMonth: null,
                     selectedRegion: 'all',
                     selectedElevation: 'all',
@@ -305,10 +312,10 @@ export default function HomePage() {
       <footer className="mt-12 border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 space-y-2">
           <p className="font-medium text-slate-400">
-            Colorado Nature & Wildlife Photography Season Tracker • Built for macOS & Windows
+            WildSeason: Wildlife & Nature Photography Season Tracker • Built for macOS & Windows
           </p>
           <p className="text-[11px] text-slate-500">
-            Field data calibrated for Rocky Mountain ecosystems. Respect Colorado Parks & Wildlife distance mandates.
+            Covering premier North American photography ecosystems. Respect wildlife distance mandates and leave no trace.
           </p>
         </div>
       </footer>

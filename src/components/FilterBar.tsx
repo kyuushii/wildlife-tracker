@@ -4,10 +4,11 @@ import React from 'react';
 import { 
   FilterState, 
   SubjectCategory, 
-  ColoradoRegion, 
+  DestinationRegion, 
   ElevationBand 
 } from '@/types';
 import { 
+  STATE_LABELS, 
   REGION_LABELS, 
   ELEVATION_LABELS, 
   MONTH_NAMES, 
@@ -23,7 +24,8 @@ import {
   PawPrint,
   Feather,
   Flower2,
-  Trees
+  Trees,
+  Globe
 } from 'lucide-react';
 
 interface FilterBarProps {
@@ -37,7 +39,6 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   setFilters,
   totalMatches,
 }) => {
-  // Current month (1-12)
   const currentMonth = new Date().getMonth() + 1;
 
   const categories: { id: SubjectCategory | 'all'; label: string; icon: React.ReactNode }[] = [
@@ -51,6 +52,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   const handleReset = () => {
     setFilters({
       category: 'all',
+      selectedState: 'all',
       selectedMonth: null,
       selectedRegion: 'all',
       selectedElevation: 'all',
@@ -61,11 +63,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
   const isFiltered = 
     filters.category !== 'all' || 
+    filters.selectedState !== 'all' ||
     filters.selectedMonth !== null || 
     filters.selectedRegion !== 'all' || 
     filters.selectedElevation !== 'all' || 
     filters.searchQuery !== '' || 
     filters.onlyPeak;
+
+  // Filter available regions based on selected state
+  const availableRegions = Object.entries(REGION_LABELS).filter(([k, val]) => {
+    if (filters.selectedState === 'all') return true;
+    return val.state === filters.selectedState;
+  });
 
   return (
     <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
@@ -77,7 +86,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             type="text"
             value={filters.searchQuery}
             onChange={(e) => setFilters(prev => ({ ...prev, searchQuery: e.target.value }))}
-            placeholder="Search by animal, flower, tree, or location (e.g. Elk, Crested Butte, Columbine)..."
+            placeholder="Search by species, bloom, park, or state (e.g. Elk, Brooks Falls, Zion, Lupine, Lamar)..."
             className="w-full pl-10 pr-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition"
           />
         </div>
@@ -110,6 +119,36 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <RotateCcw className="w-4 h-4" />
             </button>
           )}
+        </div>
+      </div>
+
+      {/* Destination / State Bar */}
+      <div className="flex items-center space-x-2 overflow-x-auto pb-1 text-xs">
+        <span className="text-slate-400 font-semibold flex items-center space-x-1 shrink-0">
+          <Globe className="w-3.5 h-3.5 text-emerald-400" />
+          <span>Destination:</span>
+        </span>
+        <div className="flex items-center space-x-1.5 shrink-0">
+          {Object.entries(STATE_LABELS).map(([code, label]) => {
+            const active = filters.selectedState === code;
+            return (
+              <button
+                key={code}
+                onClick={() => setFilters(prev => ({ 
+                  ...prev, 
+                  selectedState: code,
+                  selectedRegion: 'all' // reset region when state switches
+                }))}
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition shrink-0 ${
+                  active
+                    ? 'bg-emerald-600 text-white font-bold shadow-sm'
+                    : 'bg-slate-950/70 hover:bg-slate-800 text-slate-300 border border-slate-800'
+                }`}
+              >
+                {code === 'all' ? 'All Regions' : code}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -182,22 +221,26 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         </div>
       </div>
 
-      {/* Region & Elevation Selectors + Peak Only Toggle */}
+      {/* Geographic Zone, Elevation, and Peak Only Toggle */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 border-t border-slate-800/60">
-        {/* Region */}
+        {/* Specific Region */}
         <div className="space-y-1">
           <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center space-x-1">
             <MapPin className="w-3 h-3 text-emerald-400" />
-            <span>Colorado Region</span>
+            <span>Specific Park / Zone</span>
           </label>
           <select
             value={filters.selectedRegion}
-            onChange={(e) => setFilters(prev => ({ ...prev, selectedRegion: e.target.value as ColoradoRegion | 'all' }))}
+            onChange={(e) => setFilters(prev => ({ ...prev, selectedRegion: e.target.value as DestinationRegion | 'all' }))}
             className="w-full py-2 px-3 bg-slate-950/80 border border-slate-700/80 rounded-xl text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500"
           >
-            <option value="all">All Regions of Colorado</option>
-            {Object.entries(REGION_LABELS).map(([k, label]) => (
-              <option key={k} value={k}>{label}</option>
+            <option value="all">
+              {filters.selectedState === 'all' ? 'All Specific Zones' : `All ${STATE_LABELS[filters.selectedState] || ''} Zones`}
+            </option>
+            {availableRegions.map(([k, info]) => (
+              <option key={k} value={k}>
+                [{info.state}] {info.label}
+              </option>
             ))}
           </select>
         </div>
@@ -206,7 +249,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         <div className="space-y-1">
           <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center space-x-1">
             <Mountain className="w-3 h-3 text-emerald-400" />
-            <span>Elevation Zone</span>
+            <span>Habitat & Elevation</span>
           </label>
           <select
             value={filters.selectedElevation}

@@ -95,8 +95,8 @@ export default function HomePage() {
     }));
   }, []);
 
-  // Filter logic (incorporating categories, month, state, region, elevation, search query, AND map viewport bounds)
-  const filteredSubjects = useMemo(() => {
+  // Filter subjects based on criteria (category, state, region, elevation, search, month)
+  const allFilteredSubjects = useMemo(() => {
     return COLORADO_SUBJECTS.filter(subject => {
       // Category filter
       if (filters.category !== 'all' && subject.category !== filters.category) {
@@ -150,11 +150,16 @@ export default function HomePage() {
         }
       }
 
-      // Zillow-style Map Viewport Bounding Box Filter
-      // (Only active when in split or map mode and searchAsMapMoves is enabled)
-      if (viewMode !== 'grid' && filters.searchAsMapMoves && filters.mapBounds) {
-        const { southWest, northEast } = filters.mapBounds;
-        const hasHotspotInBounds = subject.hotspots.some(h => {
+      return true;
+    });
+  }, [filters]);
+
+  // List of subjects visible within the current map bounding box (Zillow-style)
+  const listSubjects = useMemo(() => {
+    if (viewMode !== 'grid' && filters.searchAsMapMoves && filters.mapBounds) {
+      const { southWest, northEast } = filters.mapBounds;
+      return allFilteredSubjects.filter(subject => {
+        return subject.hotspots.some(h => {
           if (!h.lat || !h.lng) return false;
           return (
             h.lat >= southWest.lat &&
@@ -163,14 +168,10 @@ export default function HomePage() {
             h.lng <= northEast.lng
           );
         });
-        if (!hasHotspotInBounds) {
-          return false;
-        }
-      }
-
-      return true;
-    });
-  }, [filters, viewMode]);
+      });
+    }
+    return allFilteredSubjects;
+  }, [allFilteredSubjects, filters.searchAsMapMoves, filters.mapBounds, viewMode]);
 
   // Current month's peaking subjects
   const currentMonthPeaking = useMemo(() => {
@@ -241,7 +242,7 @@ export default function HomePage() {
             <FilterBar
               filters={filters}
               setFilters={setFilters}
-              totalMatches={filteredSubjects.length}
+              totalMatches={listSubjects.length}
             />
 
             {/* View Mode Switcher & Map Bound Indicator */}
@@ -311,7 +312,7 @@ export default function HomePage() {
                 {/* Left: Sticky Interactive Slippy Map */}
                 <div className="lg:col-span-6 h-[480px] lg:h-[calc(100vh-210px)] lg:sticky lg:top-20 z-10">
                   <NatureMapWrapper
-                    subjects={filteredSubjects}
+                    subjects={allFilteredSubjects}
                     activeMonth={filters.selectedMonth}
                     selectedState={filters.selectedState}
                     onSelectSubject={setSelectedSubject}
@@ -324,25 +325,25 @@ export default function HomePage() {
 
                 {/* Right: Scrollable Subject Cards */}
                 <div className="lg:col-span-6 space-y-4">
-                  {filteredSubjects.length === 0 ? (
+                  {listSubjects.length === 0 ? (
                     <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 text-center space-y-3">
                       <div className="w-12 h-12 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center mx-auto">
                         <MapIcon className="w-6 h-6" />
                       </div>
-                      <h3 className="text-base font-bold text-white">No hotspots in current map area</h3>
+                      <h3 className="text-base font-bold text-white">No hotspots in current map view</h3>
                       <p className="text-xs text-slate-400 leading-relaxed">
-                        Pan or zoom the map to a different location, or uncheck "Search as I move the map" to see all destinations.
+                        There are {allFilteredSubjects.length} subjects in other regions. Drag the map, zoom out, or reset the map area to see them.
                       </p>
                       <button
                         onClick={() => setFilters(prev => ({ ...prev, mapBounds: null, selectedState: 'all' }))}
-                        className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white transition"
+                        className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold text-white transition shadow-md"
                       >
-                        Reset Map Area
+                        Reset Map Viewport ({allFilteredSubjects.length} subjects)
                       </button>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                      {filteredSubjects.map(subject => (
+                      {listSubjects.map(subject => (
                         <SubjectCard
                           key={subject.id}
                           subject={subject}
@@ -363,7 +364,7 @@ export default function HomePage() {
 
             {viewMode === 'grid' && (
               <div>
-                {filteredSubjects.length === 0 ? (
+                {allFilteredSubjects.length === 0 ? (
                   <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-12 text-center space-y-4 max-w-xl mx-auto">
                     <div className="w-12 h-12 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center mx-auto">
                       <Compass className="w-6 h-6" />
@@ -391,7 +392,7 @@ export default function HomePage() {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {filteredSubjects.map(subject => (
+                    {allFilteredSubjects.map(subject => (
                       <SubjectCard
                         key={subject.id}
                         subject={subject}
@@ -413,7 +414,7 @@ export default function HomePage() {
               <div className="space-y-4">
                 <div className="h-[70vh] w-full">
                   <NatureMapWrapper
-                    subjects={filteredSubjects}
+                    subjects={allFilteredSubjects}
                     activeMonth={filters.selectedMonth}
                     selectedState={filters.selectedState}
                     onSelectSubject={setSelectedSubject}
@@ -428,13 +429,13 @@ export default function HomePage() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs text-slate-400">
                     <span className="font-semibold text-slate-200">
-                      Showing {filteredSubjects.length} subjects in current map area
+                      Showing {listSubjects.length} subjects in current map area
                     </span>
                     <span>Scroll horizontally to browse cards</span>
                   </div>
 
                   <div className="flex space-x-4 overflow-x-auto pb-4">
-                    {filteredSubjects.map(subject => (
+                    {listSubjects.map(subject => (
                       <div key={subject.id} className="w-[320px] shrink-0">
                         <SubjectCard
                           subject={subject}

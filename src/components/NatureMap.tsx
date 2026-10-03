@@ -2,19 +2,15 @@
 
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { NatureSubject, Hotspot, MapBounds } from '@/types';
-import { MONTH_ABBR, MONTH_NAMES } from '@/data/colorado-data';
 import { 
   MapPin, 
   Sparkles, 
   Layers, 
-  Maximize2, 
   Compass, 
-  Check, 
-  PawPrint, 
-  Feather, 
-  Flower2, 
-  Trees, 
-  Eye
+  Maximize2,
+  Mountain,
+  Satellite,
+  Globe
 } from 'lucide-react';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
@@ -29,6 +25,33 @@ interface NatureMapProps {
   setSearchAsMapMoves: (val: boolean) => void;
   highlightedSubjectId: string | null;
 }
+
+const TILE_PROVIDERS = {
+  topo: {
+    id: 'topo',
+    name: 'Outdoor Topo',
+    icon: <Mountain className="w-3 h-3" />,
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Tiles &copy; Esri &mdash; USGS, NPS, GIS User Community',
+    maxZoom: 19,
+  },
+  satellite: {
+    id: 'satellite',
+    name: 'Satellite',
+    icon: <Satellite className="w-3 h-3" />,
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics',
+    maxZoom: 19,
+  },
+  osm: {
+    id: 'osm',
+    name: 'Street / Terrain',
+    icon: <Globe className="w-3 h-3" />,
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  },
+};
 
 // Controller component inside MapContainer to capture pan & zoom events
 function MapEventsHandler({ 
@@ -60,13 +83,13 @@ function MapEventsHandler({
   return null;
 }
 
-// Helper component to smoothly center on state/subject change
+// Helper component to center on state or fit markers
 function MapCenterController({ 
   selectedState, 
-  subjects 
+  hotspotPoints 
 }: { 
   selectedState: string; 
-  subjects: NatureSubject[];
+  hotspotPoints: [number, number][];
 }) {
   const map = useMap();
   const prevRef = useRef(selectedState);
@@ -74,7 +97,7 @@ function MapCenterController({
   useEffect(() => {
     if (prevRef.current !== selectedState) {
       prevRef.current = selectedState;
-      // Coordinates for center of each state
+
       const stateCenters: Record<string, { center: [number, number]; zoom: number }> = {
         CO: { center: [39.1130, -105.8580], zoom: 7 },
         WY: { center: [43.6000, -109.5000], zoom: 7 },
@@ -84,7 +107,7 @@ function MapCenterController({
         UT: { center: [38.2000, -111.9000], zoom: 7 },
         NC: { center: [35.6000, -82.6000], zoom: 8 },
         TN: { center: [35.7000, -83.6000], zoom: 8 },
-        all: { center: [42.5000, -105.0000], zoom: 4 },
+        all: { center: [42.0000, -106.0000], zoom: 5 },
       };
 
       const target = stateCenters[selectedState] || stateCenters.all;
@@ -93,6 +116,27 @@ function MapCenterController({
   }, [selectedState, map]);
 
   return null;
+}
+
+// Reset/Fit button inside map
+function FitBoundsButton({ hotspotPoints }: { hotspotPoints: [number, number][] }) {
+  const map = useMap();
+
+  const handleFit = () => {
+    if (hotspotPoints.length === 0) return;
+    const bounds = L.latLngBounds(hotspotPoints);
+    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+  };
+
+  return (
+    <button
+      onClick={handleFit}
+      title="Fit map to all markers"
+      className="p-2 rounded-xl bg-slate-950/90 backdrop-blur-md border border-slate-700 hover:bg-slate-900 text-slate-300 hover:text-white transition shadow-xl pointer-events-auto"
+    >
+      <Maximize2 className="w-4 h-4" />
+    </button>
+  );
 }
 
 export const NatureMap: React.FC<NatureMapProps> = ({
@@ -106,6 +150,7 @@ export const NatureMap: React.FC<NatureMapProps> = ({
   highlightedSubjectId,
 }) => {
   const [mounted, setMounted] = useState(false);
+  const [activeTileType, setActiveTileType] = useState<'topo' | 'satellite' | 'osm'>('topo');
   const currentMonth = new Date().getMonth() + 1;
   const targetMonth = activeMonth ?? currentMonth;
 
@@ -142,6 +187,10 @@ export const NatureMap: React.FC<NatureMapProps> = ({
     return items;
   }, [subjects, targetMonth]);
 
+  const hotspotPoints = useMemo<[number, number][]>(() => {
+    return hotspotItems.map(item => [item.hotspot.lat, item.hotspot.lng]);
+  }, [hotspotItems]);
+
   // Create styled Leaflet DivIcons
   const createCustomMarker = (cat: string, isPeak: boolean, isHighlighted: boolean) => {
     let colorBg = 'bg-slate-800 text-slate-300 border-slate-600';
@@ -153,16 +202,16 @@ export const NatureMap: React.FC<NatureMapProps> = ({
     if (cat === 'tree_foliage') colorBg = 'bg-orange-600 text-orange-100 border-orange-300';
 
     if (isPeak) {
-      ring = 'ring-4 ring-amber-400/60 animate-pulse';
+      ring = 'ring-4 ring-amber-400/80 animate-pulse';
     }
     if (isHighlighted) {
       ring = 'ring-4 ring-white scale-125 z-50';
     }
 
     const html = `
-      <div class="relative flex items-center justify-center w-8 h-8 rounded-full border-2 shadow-xl cursor-pointer transition-transform duration-150 ${colorBg} ${ring}">
-        <span class="text-xs font-bold">${cat[0].toUpperCase()}</span>
-        ${isPeak ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 border border-slate-900"></span>' : ''}
+      <div class="relative flex items-center justify-center w-8 h-8 rounded-full border-2 shadow-2xl cursor-pointer transition-transform duration-150 ${colorBg} ${ring}">
+        <span class="text-xs font-black">${cat[0].toUpperCase()}</span>
+        ${isPeak ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 border border-slate-950"></span>' : ''}
       </div>
     `;
 
@@ -186,12 +235,14 @@ export const NatureMap: React.FC<NatureMapProps> = ({
     );
   }
 
+  const selectedTile = TILE_PROVIDERS[activeTileType];
+
   return (
     <div className="relative w-full h-full min-h-[450px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
-      {/* Floating Zillow-Style Map Controls Bar */}
+      {/* Top Floating Controls Bar */}
       <div className="absolute top-4 left-4 right-4 z-[400] flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         {/* Search as I move the map toggle */}
-        <label className="pointer-events-auto flex items-center space-x-2 bg-slate-950/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-slate-700/80 text-xs font-semibold text-slate-200 shadow-xl cursor-pointer hover:bg-slate-900 transition">
+        <label className="pointer-events-auto flex items-center space-x-2 bg-slate-950/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-slate-700/80 text-xs font-semibold text-slate-200 shadow-xl cursor-pointer hover:bg-slate-900 transition">
           <input
             type="checkbox"
             checked={searchAsMapMoves}
@@ -204,10 +255,26 @@ export const NatureMap: React.FC<NatureMapProps> = ({
           )}
         </label>
 
-        {/* Hotspots Counter Pill */}
-        <div className="pointer-events-auto bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-2xl border border-slate-700/80 text-xs text-slate-300 shadow-xl flex items-center space-x-2">
-          <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-          <span><strong>{hotspotItems.length}</strong> photo hotspots in view</span>
+        {/* Tile Layer Switcher & Fit Button */}
+        <div className="pointer-events-auto flex items-center space-x-1.5 bg-slate-950/95 backdrop-blur-md p-1 rounded-2xl border border-slate-700/80 shadow-xl">
+          {(['topo', 'satellite', 'osm'] as const).map(t => {
+            const info = TILE_PROVIDERS[t];
+            const active = activeTileType === t;
+            return (
+              <button
+                key={t}
+                onClick={() => setActiveTileType(t)}
+                className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-xl text-[11px] font-semibold transition ${
+                  active
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                {info.icon}
+                <span>{info.name}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -218,11 +285,12 @@ export const NatureMap: React.FC<NatureMapProps> = ({
         scrollWheelZoom={true}
         className="w-full h-full min-h-[450px]"
       >
-        {/* Dark Matter CartoDB tiles */}
+        {/* Free Public Tile Layer (No API Key Required!) */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png"
-          maxZoom={19}
+          key={selectedTile.id}
+          attribution={selectedTile.attribution}
+          url={selectedTile.url}
+          maxZoom={selectedTile.maxZoom}
         />
 
         <MapEventsHandler
@@ -232,7 +300,7 @@ export const NatureMap: React.FC<NatureMapProps> = ({
 
         <MapCenterController
           selectedState={selectedState}
-          subjects={subjects}
+          hotspotPoints={hotspotPoints}
         />
 
         {/* Hotspot Markers */}
@@ -296,6 +364,14 @@ export const NatureMap: React.FC<NatureMapProps> = ({
           );
         })}
       </MapContainer>
+
+      {/* Bottom right floating controls: Markers Count & Fit Button */}
+      <div className="absolute bottom-4 right-4 z-[400] flex items-center space-x-2 pointer-events-none">
+        <div className="pointer-events-auto bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-xs text-slate-300 shadow-xl flex items-center space-x-1.5">
+          <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+          <span><strong>{hotspotItems.length}</strong> photo hotspots</span>
+        </div>
+      </div>
     </div>
   );
 };

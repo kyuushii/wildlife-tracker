@@ -81,6 +81,9 @@ export interface NatureSubject {
   category: SubjectCategory;
   tagline: string;
   description: string;
+  imageUrl?: string;
+  identificationMarks?: string[];
+  distinguishingTips?: string;
   states: string[];
   elevationBands: ElevationBand[];
   regions: DestinationRegion[];

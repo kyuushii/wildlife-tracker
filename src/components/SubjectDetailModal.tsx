@@ -20,7 +20,10 @@ import {
   Compass, 
   Layers,
   Calendar,
-  Globe
+  Globe,
+  Eye,
+  CheckCircle2,
+  AlertCircle
 } from 'lucide-react';
 
 interface SubjectDetailModalProps {
@@ -108,8 +111,68 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
 
         {/* Scrollable Content */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-8 divide-y divide-slate-800/80">
+          {/* Section 0: Visual Field Identification & Photo */}
+          {subject.imageUrl && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-emerald-400 flex items-center space-x-2">
+                  <Eye className="w-4 h-4 text-emerald-400" />
+                  <span>Field Identification Guide</span>
+                </h3>
+                <span className="text-xs text-slate-400 font-mono">Visual Reference</span>
+              </div>
+
+              {/* Photo Showcase */}
+              <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={subject.imageUrl}
+                  alt={subject.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-slate-200 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/60 pointer-events-none">
+                  <span className="font-semibold text-white">{subject.name}</span>
+                  <span className="italic text-slate-400 text-[11px] font-mono">{subject.scientificName}</span>
+                </div>
+              </div>
+
+              {/* Key Diagnostic Identification Marks */}
+              {subject.identificationMarks && subject.identificationMarks.length > 0 && (
+                <div className="bg-slate-950/70 p-4 rounded-2xl border border-slate-800 space-y-2.5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center space-x-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Key Diagnostic Field Marks</span>
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {subject.identificationMarks.map((mark, i) => (
+                      <div key={i} className="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800/80 text-xs text-slate-300 flex items-start space-x-2">
+                        <span className="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
+                          {i + 1}
+                        </span>
+                        <span className="leading-snug">{mark}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Distinguishing Tips */}
+              {subject.distinguishingTips && (
+                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200/90 flex items-start space-x-2.5">
+                  <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-amber-300 font-semibold mr-1.5">How to Distinguish from Lookalikes:</strong>
+                    <span>{subject.distinguishingTips}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Section 1: Overview & Habitat */}
-          <div className="space-y-4">
+          <div className="space-y-4 pt-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
               Field Description & Habitat
             </h3>

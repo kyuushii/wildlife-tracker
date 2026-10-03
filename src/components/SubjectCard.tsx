@@ -128,6 +128,26 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
           </div>
         </div>
 
+        {/* Visual Identification Photo */}
+        {subject.imageUrl && (
+          <div className="relative w-full h-36 mb-3 rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={subject.imageUrl}
+              alt={subject.name}
+              loading="lazy"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+            {subject.identificationMarks && subject.identificationMarks.length > 0 && (
+              <div className="absolute bottom-1.5 left-2 right-2 flex items-center text-[10px] bg-slate-950/90 backdrop-blur-md px-2 py-0.5 rounded border border-slate-700/60 truncate pointer-events-none">
+                <span className="font-bold text-emerald-400 shrink-0 mr-1.5">ID:</span>
+                <span className="text-slate-300 truncate font-medium">{subject.identificationMarks[0]}</span>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Titles */}
         <div>
           <h3 className="text-lg font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">

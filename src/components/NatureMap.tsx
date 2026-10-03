@@ -202,7 +202,7 @@ export const NatureMap: React.FC<NatureMapProps> = ({
     if (cat === 'tree_foliage') colorBg = 'bg-orange-600 text-orange-100 border-orange-300';
 
     if (isPeak) {
-      ring = 'ring-4 ring-amber-400/80 animate-pulse';
+      ring = 'ring-4 ring-emerald-400/80 animate-pulse';
     }
     if (isHighlighted) {
       ring = 'ring-4 ring-white scale-125 z-50';
@@ -211,7 +211,7 @@ export const NatureMap: React.FC<NatureMapProps> = ({
     const html = `
       <div class="relative flex items-center justify-center w-8 h-8 rounded-full border-2 shadow-2xl cursor-pointer transition-transform duration-150 ${colorBg} ${ring}">
         <span class="text-xs font-black">${cat[0].toUpperCase()}</span>
-        ${isPeak ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 border border-slate-950"></span>' : ''}
+        ${isPeak ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-950"></span>' : ''}
       </div>
     `;
 
@@ -320,12 +320,16 @@ export const NatureMap: React.FC<NatureMapProps> = ({
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-emerald-400 border border-emerald-900/60">
                       {item.hotspot.state}
                     </span>
-                    {item.isPeak && (
-                      <span className="flex items-center space-x-1 text-[10px] font-bold text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded-full border border-amber-500/40">
+                    {item.isPeak ? (
+                      <span className="flex items-center space-x-1 text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-400/50">
                         <Sparkles className="w-3 h-3" />
-                        <span>Peak Now</span>
+                        <span>★ Peak Now</span>
                       </span>
-                    )}
+                    ) : item.status === 1 ? (
+                      <span className="text-[10px] font-semibold text-amber-300 bg-amber-500/15 px-2 py-0.5 rounded-full border border-amber-500/40">
+                        Shoulder
+                      </span>
+                    ) : null}
                   </div>
 
                   <div>

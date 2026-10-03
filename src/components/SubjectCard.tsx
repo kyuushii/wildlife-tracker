@@ -39,13 +39,14 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
   const targetMonth = activeMonth ?? currentMonth;
   const currentPhenology = subject.phenology.find(p => p.month === targetMonth);
   const isCurrentPeak = currentPhenology?.status === 2;
+  const isCurrentShoulder = currentPhenology?.status === 1;
 
   const getCategoryIcon = (cat: string) => {
     switch (cat) {
       case 'mammal': return <PawPrint className="w-3.5 h-3.5 text-amber-400" />;
       case 'bird': return <Feather className="w-3.5 h-3.5 text-sky-400" />;
       case 'wildflower': return <Flower2 className="w-3.5 h-3.5 text-emerald-400" />;
-      case 'tree_foliage': return <Trees className="w-3.5 h-3.5 text-amber-500" />;
+      case 'tree_foliage': return <Trees className="w-3.5 h-3.5 text-orange-400" />;
       default: return <Sparkles className="w-3.5 h-3.5 text-emerald-400" />;
     }
   };
@@ -79,9 +80,14 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
 
           <div className="flex items-center space-x-1">
             {isCurrentPeak && (
-              <span className="flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 animate-pulse">
+              <span className="flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/50 animate-pulse">
                 <Sparkles className="w-3 h-3" />
                 <span>Peak Now</span>
+              </span>
+            )}
+            {!isCurrentPeak && isCurrentShoulder && (
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                Shoulder / Waning
               </span>
             )}
 
@@ -127,18 +133,22 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
           ))}
         </div>
 
-        {/* 12-Month Mini Heatmap Timeline */}
+        {/* 12-Month Mini Heatmap Timeline with Intuitive Colors */}
         <div className="mb-4 bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80">
           <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1.5">
             <span className="font-semibold uppercase tracking-wider text-slate-400">12-Month Phenology</span>
-            <div className="flex items-center space-x-2">
-              <span className="flex items-center space-x-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span className="text-[9px]">Active</span>
+            <div className="flex items-center space-x-2.5">
+              <span className="flex items-center space-x-1" title="Vibrant Green = Peak photography window">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span className="text-[10px] text-emerald-300 font-semibold">Peak</span>
               </span>
-              <span className="flex items-center space-x-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                <span className="text-[9px]">Peak</span>
+              <span className="flex items-center space-x-1" title="Amber / Yellow = Shoulder or waning season">
+                <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span className="text-[10px] text-amber-300">Shoulder</span>
+              </span>
+              <span className="flex items-center space-x-1" title="Gray = Dormant / Absent">
+                <span className="w-2 h-2 rounded-full bg-slate-700"></span>
+                <span className="text-[10px] text-slate-500">Off</span>
               </span>
             </div>
           </div>
@@ -146,16 +156,23 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
           <div className="grid grid-cols-12 gap-1">
             {subject.phenology.map((p, idx) => {
               const isSelected = activeMonth === p.month;
-              let bg = 'bg-slate-800/40 text-slate-600';
-              if (p.status === 1) bg = 'bg-emerald-950 text-emerald-400 border border-emerald-800/50';
-              if (p.status === 2) bg = 'bg-amber-500/25 text-amber-300 border border-amber-500/70 font-bold';
+              let bg = 'bg-slate-800/40 text-slate-600 border border-transparent';
+              
+              // 1 = Shoulder / Waning / Emerging (Warm Amber/Yellow)
+              if (p.status === 1) {
+                bg = 'bg-amber-500/15 text-amber-300 border border-amber-500/40 font-medium';
+              }
+              // 2 = Peak Season (Vibrant Emerald Green)
+              if (p.status === 2) {
+                bg = 'bg-emerald-500/25 text-emerald-300 border border-emerald-400 font-extrabold shadow-sm shadow-emerald-500/20';
+              }
 
               return (
                 <div
                   key={p.month}
-                  title={`${MONTH_ABBR[idx]}: ${p.keyActivity}`}
+                  title={`${MONTH_ABBR[idx]}: ${p.status === 2 ? '[PEAK] ' : p.status === 1 ? '[SHOULDER] ' : '[OFF] '}${p.keyActivity}`}
                   className={`text-[9px] h-6 flex items-center justify-center rounded transition ${bg} ${
-                    isSelected ? 'ring-2 ring-emerald-400 font-extrabold' : ''
+                    isSelected ? 'ring-2 ring-white scale-105 z-10' : ''
                   }`}
                 >
                   {MONTH_ABBR[idx][0]}
@@ -166,7 +183,9 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
 
           {currentPhenology && (
             <p className="text-[11px] text-slate-300 mt-2 font-medium truncate">
-              <span className="text-amber-400 font-semibold">{MONTH_ABBR[targetMonth - 1]}: </span>
+              <span className={isCurrentPeak ? 'text-emerald-400 font-bold' : isCurrentShoulder ? 'text-amber-400 font-semibold' : 'text-slate-400'}>
+                {MONTH_ABBR[targetMonth - 1]} ({isCurrentPeak ? '★ Peak' : isCurrentShoulder ? 'Shoulder' : 'Off-Season'}):
+              </span>{' '}
               {currentPhenology.keyActivity}
             </p>
           )}

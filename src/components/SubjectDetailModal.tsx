@@ -153,12 +153,26 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
 
           {/* Section 2: 12-Month Phenology Matrix */}
           <div className="pt-6 space-y-4">
-            <div className="flex items-center justify-between">
+            {/* Legend & Title */}
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
                 <Calendar className="w-4 h-4 text-emerald-400" />
                 <span>Annual Phenology & Life Cycle</span>
               </h3>
-              <span className="text-xs text-slate-400">Click a month for activity details</span>
+              <div className="flex items-center space-x-3 text-xs">
+                <span className="flex items-center space-x-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span className="text-[11px] text-emerald-300 font-bold">★ Peak Season</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                  <span className="text-[11px] text-amber-300 font-medium">Shoulder / Waning</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <span className="w-2 h-2 rounded-full bg-slate-700"></span>
+                  <span className="text-[11px] text-slate-500">Off-Season</span>
+                </span>
+              </div>
             </div>
 
             {/* 12-Month Bar */}
@@ -166,20 +180,20 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
               {subject.phenology.map((p, idx) => {
                 const isSelected = selectedMonthTab === p.month;
                 let statusBadge = 'bg-slate-950 text-slate-600 border-slate-800';
-                if (p.status === 1) statusBadge = 'bg-emerald-950 text-emerald-400 border-emerald-800/80';
-                if (p.status === 2) statusBadge = 'bg-amber-500/20 text-amber-300 border-amber-500/80 font-bold';
+                if (p.status === 1) statusBadge = 'bg-amber-500/15 text-amber-300 border-amber-500/40 font-medium';
+                if (p.status === 2) statusBadge = 'bg-emerald-500/25 text-emerald-300 border-emerald-400 font-extrabold shadow-sm shadow-emerald-500/20';
 
                 return (
                   <button
                     key={p.month}
                     onClick={() => setSelectedMonthTab(p.month)}
                     className={`p-2 rounded-xl text-center border transition flex flex-col items-center justify-center ${statusBadge} ${
-                      isSelected ? 'ring-2 ring-emerald-400 scale-105 z-10' : ''
+                      isSelected ? 'ring-2 ring-white scale-105 z-10' : ''
                     }`}
                   >
                     <span className="text-xs font-semibold">{MONTH_ABBR[idx]}</span>
                     <span className="text-[10px] mt-0.5">
-                      {p.status === 2 ? '★ Peak' : p.status === 1 ? 'Active' : 'Dormant'}
+                      {p.status === 2 ? '★ Peak' : p.status === 1 ? 'Shoulder' : 'Off'}
                     </span>
                   </button>
                 );
@@ -189,14 +203,30 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
             {/* Selected Month Detail Banner */}
             {currentMonthData && (
               <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-start space-x-3">
-                <div className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-amber-400 mt-0.5">
+                <div className={`p-2 rounded-xl border ${
+                  currentMonthData.status === 2 
+                    ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-400' 
+                    : currentMonthData.status === 1
+                    ? 'bg-amber-950/60 border-amber-500/40 text-amber-400'
+                    : 'bg-slate-900 border-slate-800 text-slate-500'
+                } mt-0.5`}>
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-100">
-                    {MONTH_NAMES[selectedMonthTab - 1]} Activity Status:
-                    <span className="ml-2 font-normal text-amber-300">
-                      {currentMonthData.status === 2 ? 'Peak Photography Window' : currentMonthData.status === 1 ? 'Active Field Season' : 'Dormant / Low Activity'}
+                    {MONTH_NAMES[selectedMonthTab - 1]} Status:
+                    <span className={`ml-2 ${
+                      currentMonthData.status === 2 
+                        ? 'text-emerald-300 font-bold' 
+                        : currentMonthData.status === 1
+                        ? 'text-amber-300 font-semibold'
+                        : 'text-slate-400 font-normal'
+                    }`}>
+                      {currentMonthData.status === 2 
+                        ? '★ Peak Photography Window (Prime Action / Colors)' 
+                        : currentMonthData.status === 1 
+                        ? 'Shoulder / Waning / Emerging (Active transition)' 
+                        : 'Dormant / Off-Season'}
                     </span>
                   </h4>
                   <p className="text-sm text-slate-300 mt-1 leading-relaxed">

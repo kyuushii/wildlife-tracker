@@ -14,7 +14,8 @@ import {
   Trees,
   Crosshair,
   Maximize2,
-  Eye
+  Eye,
+  ArrowLeftRight
 } from 'lucide-react';
 
 interface SubjectCardProps {
@@ -29,6 +30,7 @@ interface SubjectCardProps {
   isFocused?: boolean;
   onFocusOnMap?: (subject: NatureSubject) => void;
   onOpenLightbox?: (subject: NatureSubject) => void;
+  onCompare?: (subject: NatureSubject) => void;
 }
 
 export const SubjectCard: React.FC<SubjectCardProps> = ({
@@ -43,6 +45,7 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
   isFocused = false,
   onFocusOnMap,
   onOpenLightbox,
+  onCompare,
 }) => {
   const currentMonth = new Date().getMonth() + 1;
   const targetMonth = activeMonth ?? currentMonth;
@@ -268,16 +271,32 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
           </span>
         </div>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelectSubject(subject);
-          }}
-          className="flex items-center space-x-1 text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-emerald-400 hover:text-emerald-300 border border-slate-800 transition group/btn shrink-0"
-        >
-          <span>Field Guide</span>
-          <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-        </button>
+        <div className="flex items-center space-x-1.5 shrink-0">
+          {onCompare && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onCompare(subject);
+              }}
+              title="Compare with another species"
+              className="flex items-center space-x-1 text-xs px-2 py-1 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-slate-400 hover:text-emerald-400 border border-slate-800 transition cursor-pointer"
+            >
+              <ArrowLeftRight className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-[11px]">Compare</span>
+            </button>
+          )}
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectSubject(subject);
+            }}
+            className="flex items-center space-x-1 text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-emerald-400 hover:text-emerald-300 border border-slate-800 transition group/btn shrink-0 cursor-pointer"
+          >
+            <span>Field Guide</span>
+            <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+          </button>
+        </div>
       </div>
     </div>
   );

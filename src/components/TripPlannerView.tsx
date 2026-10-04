@@ -15,6 +15,7 @@ import {
   Compass,
   ChevronRight
 } from 'lucide-react';
+import { FieldPacketPrintModal } from '@/components/FieldPacketPrintModal';
 
 interface TripPlannerViewProps {
   bookmarkedIds: string[];
@@ -31,6 +32,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
 }) => {
   const [selectedMonth, setSelectedMonth] = useState<number | 'all'>('all');
   const [completedItems, setCompletedItems] = useState<Record<string, boolean>>({});
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
 
   const bookmarkedSubjects = COLORADO_SUBJECTS.filter(s => bookmarkedIds.includes(s.id));
 
@@ -39,7 +41,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
   };
 
   const handlePrint = () => {
-    window.print();
+    setIsPrintModalOpen(true);
   };
 
   const filtered = selectedMonth === 'all'
@@ -258,6 +260,13 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
           </div>
         </div>
       )}
+
+      {/* Field Packet Printable Preview Modal */}
+      <FieldPacketPrintModal
+        isOpen={isPrintModalOpen}
+        onClose={() => setIsPrintModalOpen(false)}
+        bookmarkedIds={bookmarkedIds}
+      />
     </div>
   );
 };

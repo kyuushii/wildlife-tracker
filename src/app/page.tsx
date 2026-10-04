@@ -29,6 +29,8 @@ import { ElevationGuideModal } from '@/components/ElevationGuideModal';
 import { SettingsModal } from '@/components/SettingsModal';
 import { NatureMapWrapper } from '@/components/NatureMapWrapper';
 import { ImageLightboxModal } from '@/components/ImageLightboxModal';
+import { SpeciesComparisonModal } from '@/components/SpeciesComparisonModal';
+import { SeasonalTransitionAlert } from '@/components/SeasonalTransitionAlert';
 import { 
   Sparkles, 
   Compass, 
@@ -73,6 +75,9 @@ export default function HomePage() {
   const [lightboxSubject, setLightboxSubject] = useState<NatureSubject | null>(null);
   const [isElevationGuideOpen, setIsElevationGuideOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
+  const [compareSubjectA, setCompareSubjectA] = useState<NatureSubject | null>(null);
+  const [compareSubjectB, setCompareSubjectB] = useState<NatureSubject | null>(null);
 
   // Load storage on mount
   useEffect(() => {
@@ -229,6 +234,7 @@ export default function HomePage() {
         sightingCount={sightings.length}
         onOpenSettings={() => setIsSettingsOpen(true)}
         onOpenElevationGuide={() => setIsElevationGuideOpen(true)}
+        onOpenCompare={() => setIsCompareModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -276,6 +282,12 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+
+            {/* 14 to 30-Day Phenology Transition Forecast */}
+            <SeasonalTransitionAlert
+              onSelectSubject={setSelectedSubject}
+              currentMonth={currentMonth}
+            />
 
             {/* Filter Bar */}
             <FilterBar
@@ -399,6 +411,10 @@ export default function HomePage() {
                           isFocused={focusedSubjectId === subject.id}
                           onFocusOnMap={(sub) => setFocusedSubjectId(prev => prev === sub.id ? null : sub.id)}
                           onOpenLightbox={(sub) => setLightboxSubject(sub)}
+                          onCompare={(sub) => {
+                            setCompareSubjectA(sub);
+                            setIsCompareModalOpen(true);
+                          }}
                         />
                       ))}
                     </div>
@@ -454,6 +470,10 @@ export default function HomePage() {
                           setViewMode('split');
                         }}
                         onOpenLightbox={(sub) => setLightboxSubject(sub)}
+                        onCompare={(sub) => {
+                          setCompareSubjectA(sub);
+                          setIsCompareModalOpen(true);
+                        }}
                       />
                     ))}
                   </div>
@@ -503,6 +523,10 @@ export default function HomePage() {
                           isFocused={focusedSubjectId === subject.id}
                           onFocusOnMap={(sub) => setFocusedSubjectId(prev => prev === sub.id ? null : sub.id)}
                           onOpenLightbox={(sub) => setLightboxSubject(sub)}
+                          onCompare={(sub) => {
+                            setCompareSubjectA(sub);
+                            setIsCompareModalOpen(true);
+                          }}
                         />
                       </div>
                     ))}
@@ -582,6 +606,14 @@ export default function HomePage() {
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
         onDataChanged={refreshData}
+      />
+
+      {/* Side-by-Side Species Lookalike Comparison Modal */}
+      <SpeciesComparisonModal
+        isOpen={isCompareModalOpen}
+        onClose={() => setIsCompareModalOpen(false)}
+        initialSubjectA={compareSubjectA}
+        initialSubjectB={compareSubjectB}
       />
 
       {/* Footer */}

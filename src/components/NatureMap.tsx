@@ -235,41 +235,82 @@ export const NatureMap: React.FC<NatureMapProps> = ({
     return items;
   }, [subjects, targetMonth]);
 
-  // If a subject is focused, filter to only that animal's hotspots, or highlight them!
+// Deterministic coordinate jitter to fan out overlapping pins in the same park
+function applyJitter(items: { subject: NatureSubject; hotspot: Hotspot; isPeak: boolean; status: number }[]) {
+  // Group by grid cell of ~0.003 degrees (~300m)
+  const clusters: { [key: string]: number[] } = {};
+  items.forEach((item, idx) => {
+    const gridKey = `${Math.round(item.hotspot.lat * 300)},${Math.round(item.hotspot.lng * 300)}`;
+    if (!clusters[gridKey]) clusters[gridKey] = [];
+    clusters[gridKey].push(idx);
+  });
+
+  return items.map((item, idx) => {
+    const gridKey = `${Math.round(item.hotspot.lat * 300)},${Math.round(item.hotspot.lng * 300)}`;
+    const cluster = clusters[gridKey];
+    if (!cluster || cluster.length <= 1) {
+      return { ...item, displayLat: item.hotspot.lat, displayLng: item.hotspot.lng };
+    }
+
+    const indexInCluster = cluster.indexOf(idx);
+    const count = cluster.length;
+    // Spiral / circular offset
+    const angle = (indexInCluster / count) * 2 * Math.PI;
+    const radius = 0.0035; // approx 350 meters, cleanly separates icons without shifting off park
+    const displayLat = item.hotspot.lat + radius * Math.cos(angle);
+    const displayLng = item.hotspot.lng + (radius / Math.cos((item.hotspot.lat * Math.PI) / 180)) * Math.sin(angle);
+
+    return { ...item, displayLat, displayLng };
+  });
+}
+
+  const [isolateMode, setIsolateMode] = useState<boolean>(false);
+
+  // If a subject is focused, highlight it on map or isolate it if selected
   const displayedHotspotItems = useMemo(() => {
-    if (!focusedSubjectId) return allHotspotItems;
-    const focusedItems = allHotspotItems.filter(item => item.subject.id === focusedSubjectId);
-    return focusedItems.length > 0 ? focusedItems : allHotspotItems;
-  }, [allHotspotItems, focusedSubjectId]);
+    let rawItems = allHotspotItems;
+    if (focusedSubjectId && isolateMode) {
+      rawItems = allHotspotItems.filter(item => item.subject.id === focusedSubjectId);
+    }
+    return applyJitter(rawItems);
+  }, [allHotspotItems, focusedSubjectId, isolateMode]);
 
   // Custom Leaflet DivIcon
-  const createCustomMarker = (cat: string, isPeak: boolean, isFocused: boolean, isHighlighted: boolean) => {
+  const createCustomMarker = (
+    cat: string, 
+    isPeak: boolean, 
+    isFocused: boolean, 
+    isHighlighted: boolean,
+    isDimmed: boolean
+  ) => {
     let colorBg = 'bg-slate-800 text-slate-300 border-slate-600';
     let ring = '';
+    let opacityClass = isDimmed ? 'opacity-35 scale-75 hover:opacity-100 hover:scale-100' : 'opacity-100';
 
     if (cat === 'mammal') colorBg = 'bg-amber-600 text-amber-100 border-amber-400';
     if (cat === 'bird') colorBg = 'bg-sky-600 text-sky-100 border-sky-300';
     if (cat === 'wildflower') colorBg = 'bg-emerald-600 text-emerald-100 border-emerald-300';
     if (cat === 'tree_foliage') colorBg = 'bg-orange-600 text-orange-100 border-orange-300';
 
-    if (isPeak) {
+    if (isPeak && !isDimmed) {
       ring = 'ring-4 ring-emerald-400/80 animate-pulse';
     }
     if (isFocused || isHighlighted) {
-      ring = 'ring-4 ring-white scale-125 z-[1000]';
-      colorBg = 'bg-emerald-500 text-slate-950 border-white';
+      ring = 'ring-4 ring-emerald-300 ring-offset-2 ring-offset-slate-950 scale-125 shadow-[0_0_25px_rgba(52,211,153,0.9)]';
+      colorBg = 'bg-emerald-500 text-slate-950 border-white font-black';
+      opacityClass = 'opacity-100 z-[1000]';
     }
 
     const html = `
-      <div class="relative flex items-center justify-center w-8 h-8 rounded-full border-2 shadow-2xl cursor-pointer transition-transform duration-150 ${colorBg} ${ring}">
+      <div class="relative flex items-center justify-center w-8 h-8 rounded-full border-2 shadow-2xl cursor-pointer transition-all duration-200 ${colorBg} ${ring} ${opacityClass}">
         <span class="text-xs font-black">${cat[0].toUpperCase()}</span>
-        ${isPeak ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-950"></span>' : ''}
+        ${isPeak && !isDimmed ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-950"></span>' : ''}
       </div>
     `;
 
     return L.divIcon({
       html,
-      className: 'custom-leaflet-icon',
+      className: `custom-leaflet-icon ${isFocused ? 'leaflet-focused-marker' : ''}`,
       iconSize: [32, 32],
       iconAnchor: [16, 16],
       popupAnchor: [0, -18],
@@ -333,15 +374,45 @@ export const NatureMap: React.FC<NatureMapProps> = ({
       {/* Floating Focused Animal Banner */}
       {focusedSubject && (
         <div className="absolute top-16 left-4 right-4 z-[400] pointer-events-none flex justify-center">
-          <div className="pointer-events-auto bg-slate-950/95 backdrop-blur-md px-4 py-2 rounded-2xl border border-emerald-500/60 shadow-2xl flex items-center space-x-3 text-xs">
+          <div className="pointer-events-auto bg-slate-950/95 backdrop-blur-md px-4 py-2 rounded-2xl border border-emerald-500/60 shadow-2xl flex flex-wrap items-center gap-3 text-xs">
             <span className="flex items-center space-x-1.5 text-emerald-300 font-bold">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Showing: {focusedSubject.name}</span>
+              <span>Target: {focusedSubject.name}</span>
             </span>
-            <span className="text-slate-400">({displayedHotspotItems.length} locations)</span>
+            <span className="text-slate-400">
+              ({focusedSubject.hotspots.length} hotspots)
+            </span>
+
+            {/* View Mode Toggle: Highlight in Context vs Isolate */}
+            <div className="flex items-center bg-slate-900 border border-slate-700/80 rounded-xl p-0.5">
+              <button
+                type="button"
+                onClick={() => setIsolateMode(false)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition ${
+                  !isolateMode
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                Highlight
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsolateMode(true)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition ${
+                  isolateMode
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                Isolate
+              </button>
+            </div>
+
             <button
+              type="button"
               onClick={onClearFocus}
-              className="flex items-center space-x-1 px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition"
+              className="flex items-center space-x-1 px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition ml-auto"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Show All Species</span>
@@ -384,13 +455,15 @@ export const NatureMap: React.FC<NatureMapProps> = ({
         {displayedHotspotItems.map((item, idx) => {
           const isFocused = focusedSubjectId === item.subject.id;
           const isHighlighted = highlightedSubjectId === item.subject.id;
-          const icon = createCustomMarker(item.subject.category, item.isPeak, isFocused, isHighlighted);
+          const isDimmed = Boolean(focusedSubjectId && !isFocused && !isolateMode);
+          const icon = createCustomMarker(item.subject.category, item.isPeak, isFocused, isHighlighted, isDimmed);
 
           return (
             <Marker
               key={`${item.subject.id}-${item.hotspot.name}-${idx}`}
-              position={[item.hotspot.lat, item.hotspot.lng]}
+              position={[item.displayLat, item.displayLng]}
               icon={icon}
+              zIndexOffset={isFocused ? 1000 : 0}
               eventHandlers={{
                 click: () => {
                   onFocusSubject(item.subject.id);
@@ -457,7 +530,15 @@ export const NatureMap: React.FC<NatureMapProps> = ({
         <div className="pointer-events-auto bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-xs text-slate-300 shadow-xl flex items-center space-x-1.5">
           <MapPin className="w-3.5 h-3.5 text-emerald-400" />
           <span>
-            <strong>{displayedHotspotItems.length}</strong> photo hotspots {focusedSubjectId ? `for ${focusedSubject?.name}` : 'in view'}
+            {focusedSubject ? (
+              <>
+                <strong>{focusedSubject.hotspots.length}</strong> photo spots for {focusedSubject.name} {isolateMode ? '(isolated)' : '(highlighted)'}
+              </>
+            ) : (
+              <>
+                <strong>{displayedHotspotItems.length}</strong> photo hotspots on map
+              </>
+            )}
           </span>
         </div>
       </div>

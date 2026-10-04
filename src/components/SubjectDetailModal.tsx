@@ -371,12 +371,31 @@ export const SubjectDetailModal: React.FC<SubjectDetailModalProps> = ({
             </div>
           </div>
 
-          {/* Section 4: Hotspots & Scouting Locations */}
+          {/* Section 4: Geographic Range & Hotspots */}
           <div className="pt-6 space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
-              <Compass className="w-4 h-4 text-emerald-400" />
-              <span>Curated Public Land Hotspots</span>
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
+                <Compass className="w-4 h-4 text-emerald-400" />
+                <span>Geographic Range & Scouting Hotspots</span>
+              </h3>
+              <div className="flex items-center space-x-1.5">
+                {subject.states.map(st => (
+                  <span key={st} className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-emerald-400 border border-slate-700">
+                    {st}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {subject.rangeNotes && (
+              <div className="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start space-x-2.5">
+                <Globe className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-white font-semibold">Broad Regional Distribution: </strong>
+                  <span>{subject.rangeNotes}</span>
+                </div>
+              </div>
+            )}
 
             <div className="space-y-4">
               {subject.hotspots.map((spot, i) => (

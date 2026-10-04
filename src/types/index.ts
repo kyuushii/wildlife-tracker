@@ -20,20 +20,29 @@ export type DestinationRegion =
   // Greater Yellowstone & Wyoming / Montana
   | 'wy_yellowstone_lamar'
   | 'wy_grand_teton'
+  | 'wy_red_desert'
+  | 'glacier_rockies'
   // Alaska
   | 'ak_katmai_brooks'
   | 'ak_denali'
   | 'ak_kenai_coastal'
-  // Pacific Northwest
+  // Pacific Northwest & California
   | 'pnw_olympic_rainforest'
   | 'pnw_cascades_rainier'
-  // Desert Southwest
+  | 'ca_sierra_yosemite'
+  // Desert Southwest & Great Basin
   | 'sw_sonoran_desert'
+  | 'sw_coconino'
+  | 'sw_arizona_strip'
   | 'sw_zion_canyon'
   | 'sw_moab_arches'
-  // Appalachia & Great Smokies
+  | 'ut_wasatch'
+  // Northern Plains & Badlands
+  | 'sd_badlands'
+  // Appalachia & Shenandoah
   | 'app_great_smokies'
-  | 'app_blue_ridge';
+  | 'app_blue_ridge'
+  | 'app_shenandoah';
 
 export type StateOrZone = 
   | 'ALL'
@@ -84,6 +93,7 @@ export interface NatureSubject {
   imageUrl?: string;
   identificationMarks?: string[];
   distinguishingTips?: string;
+  rangeNotes?: string;
   states: string[];
   elevationBands: ElevationBand[];
   regions: DestinationRegion[];

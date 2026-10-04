@@ -147,15 +147,12 @@ function LoginForm() {
             </button>
           </form>
 
-          {/* Privacy & Deployment Note */}
-          <div className="pt-4 border-t border-slate-800 text-center space-y-2">
-            <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Protected with secure HTTP-only session cookies</span>
+          {/* Security badge */}
+          <div className="pt-3 border-t border-slate-800 text-center">
+            <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500/70" />
+              <span>Encrypted Session Access</span>
             </div>
-            <p className="text-[11px] text-slate-400 leading-tight">
-              Password can be customized at any time in Vercel Environment Variables (<code className="text-amber-300">SITE_PASSWORD</code>).
-            </p>
           </div>
         </div>
 

@@ -8,8 +8,10 @@ import {
   BookOpen, 
   Settings as SettingsIcon,
   Calendar,
-  Layers
+  Layers,
+  LogOut
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
   activeTab: 'explore' | 'planner' | 'journal';
@@ -28,6 +30,19 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSettings,
   onOpenElevationGuide,
 }) => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      router.push('/login');
+      router.refresh();
+    } catch (e) {
+      console.error(e);
+      window.location.href = '/login';
+    }
+  };
+
   return (
     <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,6 +127,13 @@ export const Header: React.FC<HeaderProps> = ({
               className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition"
             >
               <SettingsIcon className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleLogout}
+              title="Lock / Log Out"
+              className="p-2 rounded-lg bg-slate-900 hover:bg-red-950/60 text-slate-400 hover:text-red-300 border border-slate-800 hover:border-red-800/50 transition cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" />
             </button>
           </div>
         </div>
